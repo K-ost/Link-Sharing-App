@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&display=swap');
+
+:root {
+  --animate: all 200ms ease-in-out;
+  --color-purple: #633CFF;
+  --color-purple-hover: #BEADFF;
+  --color-purple-light: #EFEBFF;
+  --color-grey: #737373;
+  --color-grey-dark: #333333;
+  --color-grey-light: #FAFAFA;
+  --color-border: #D9D9D9;
+  --color-white: #FFFFFF;
+  --color-red: #FF3939;
+  --ff: 'Instrument Sans', sans-serif;
+  --fs: 16px;
+  --gap: 24px;
+  --module-gap: 40px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-grey-light);
+  color: var(--color-grey);
+  font-family: var(--ff);
+  font-size: var(--fs);
+  margin: 0;
+}
+
+a {
+  color: var(--color-purple);
+  text-decoration: none;
+  &:hover {
+    color: var(--color-purple-hover);
+  }
+}
+
+.text-center { text-align: center; }
+
+h1, .h1 {
+  color: var(--color-grey-dark);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 48px;
+  margin: 0 0 8px;
+}
+
+/* container-short */
+.container-short {
+  max-width: 476px;
+  margin: 0 auto;
+  &.centered {
+    align-items: center;
+    display: flex;
+    min-height: 100vh;
+    &>div { flex: 1; }
+  }
+}
+
+/* module */
+.module {
+  background: #fff;
+  border-radius: 12px;
+  padding: var(--module-gap);
+  &-logo {
+    margin: 0 0 51px;
+    img { display: block; margin: 0 auto; }
+  }
+  &-text {
+    margin: 0 0 40px;
+    &:last-child { margin: 0; }
+  }
+}
+
+
+
