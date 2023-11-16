@@ -4,23 +4,33 @@ import Empty from "../components/Empty"
 import Content from "../components/Content"
 import { useFieldArray, useForm } from "react-hook-form"
 import { nanoid } from "nanoid"
+import { useLinks } from "../store/useLinks"
+import { linksOptions } from "../helpers"
 
 const Desktop: React.FC = () => {
+  const { links, removeLink, setLink } = useLinks()
 
-  const { control, register, handleSubmit, formState: { errors } } = useForm()
+  const { control, register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      links
+    }
+  })
   const { fields, append, remove } = useFieldArray({
     control,
     name: "links"
   })
 
-  console.log('errors', errors)
+  // addLink
+  const addLink = (data: any) => {
+    setLink(data.links)
+  }
 
   return (
     <Content>
       <h1>Customize your links</h1>
       <article className="article">Add/edit/remove links below and then share all your profiles with the world!</article>
 
-      <form onSubmit={handleSubmit(data => console.log(data))}>
+      <form onSubmit={handleSubmit(addLink)}>
         
         <FormField>
           <Btn text="+ Add new link" bordered expand handler={() => append({ id: nanoid(), platform: "", link: "" })} />
@@ -30,9 +40,9 @@ const Desktop: React.FC = () => {
           {fields.map((item, index) => (
             <li key={item.id}>
               <select {...register(`links.${index}.platform`)}>
-                <option value="1">Select 1</option>
-                <option value="2">Select 2</option>
-                <option value="3">Select 3</option>
+                {linksOptions.map(option => (
+                  <option key={option.id} value={option.value}>{option.label}</option>
+                ))}
               </select>
               <input {...register(`links.${index}.link`, { required: 'dsadasda' })} />
               <button type="button" onClick={() => remove(Number(item.id))}>Delete</button>
