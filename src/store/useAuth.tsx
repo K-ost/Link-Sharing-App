@@ -9,15 +9,15 @@ interface AuthState {
 
 export const useAuth = create<AuthState>()(
   devtools(
-    //persist(
+    persist(
       (set) => ({
         auth: false,
         setLogin: () => set((state) => ({ auth: true })),
         setLogout: () => set((state) => ({ auth: false }))
       }),
-      // {
-      //   name: 'auth'
-      // }
-    //)
+      {
+        name: 'auth'
+      }
+    )
   )
 )

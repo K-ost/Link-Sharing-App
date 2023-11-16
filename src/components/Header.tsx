@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import logo from "../assets/images/logo-devlinks-large.svg"
 import Nav from "./Nav"
-import Btn from "./Btn"
+import Btn from "./Forms/Btn"
 
 // Styles
 export const HeaderBox = styled.header`

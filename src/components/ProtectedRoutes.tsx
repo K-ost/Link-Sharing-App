@@ -2,6 +2,7 @@ import { Navigate, Outlet } from "react-router-dom"
 import styled from "styled-components"
 import Header, { HeaderBox } from "./Header"
 import preview from "../assets/images/illustration-phone-mockup.svg"
+import PreviewScreen from "./PreviewScreen"
 
 interface IProtectedRoutes {
   isAuth: boolean
@@ -21,12 +22,13 @@ const AppWrap = styled.div`
     "Preview Content";
   ${HeaderBox} { grid-area: Header; }
   .module-preview { grid-area: Preview; display: flex; align-items: center; justify-content: center; }
-  .module-content { grid-area: Content; overflow: auto; }
+  .module-content { grid-area: Content; padding: 0; overflow: hidden; }
 `
 const PreviewWrap = styled.div`
   background: url(${preview}) 0 0 no-repeat;
   height: 632px;
   width: 307px;
+  padding: 64px 35px 30px;
 `
 
 const ProtectedRoutes: React.FC<IProtectedRoutes> = ({ isAuth }) => {
@@ -34,7 +36,9 @@ const ProtectedRoutes: React.FC<IProtectedRoutes> = ({ isAuth }) => {
   ? <AppWrap>
       <Header />
       <div className="module module-preview">
-        <PreviewWrap></PreviewWrap>
+        <PreviewWrap>
+          <PreviewScreen />
+        </PreviewWrap>
       </div>
       <div className="module module-content">
         <Outlet />

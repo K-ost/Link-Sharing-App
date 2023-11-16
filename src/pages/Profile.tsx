@@ -1,11 +1,11 @@
-import { ArticleText } from "./Desktop"
+import Content from "../components/Content"
 
 const Profile: React.FC = () => {
   return (
-    <div>
+    <Content>
       <h1>Profile Details</h1>
-      <ArticleText>Add your details to create a personal touch to your profile.</ArticleText>
-    </div>
+      <article className="article">Add your details to create a personal touch to your profile.</article>
+    </Content>
   )
 }
 

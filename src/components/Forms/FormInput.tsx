@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import link from "../assets/images/icon-link.svg"
-import mail from "../assets/images/icon-email.svg"
-import lock from "../assets/images/icon-password.svg"
+import link from "../../assets/images/icon-link.svg"
+import mail from "../../assets/images/icon-email.svg"
+import lock from "../../assets/images/icon-password.svg"
 
 export type InputIconType = 'link' | 'mail' | 'lock' | null
 

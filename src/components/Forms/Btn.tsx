@@ -6,6 +6,7 @@ interface IBtn {
   expand?: boolean
   handler?: () => void
   text: string
+  type?: 'button' | 'submit'
 }
 
 // Styled
@@ -37,9 +38,10 @@ const Button = styled.button<{ $bordered: boolean, $expand: boolean }>`
   }
 `
 
-const Btn: React.FC<IBtn> = ({ bordered = false, disabled, expand = false, handler, text }) => {
+const Btn: React.FC<IBtn> = ({ bordered = false, disabled, expand = false, handler, text, type = 'button' }) => {
   return (
     <Button
+      type={type}
       $bordered={bordered}
       $expand={expand}
       disabled={disabled}

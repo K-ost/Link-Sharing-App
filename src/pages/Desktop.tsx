@@ -1,27 +1,52 @@
-import styled from "styled-components"
-import Btn from "../components/Btn"
-import FormField from "../components/FormField"
-import empty from "../assets/images/illustration-empty.svg"
-
-// Styled
-export const ArticleText = styled.article`
-  margin: 0 0 40px;
-`
+import Btn from "../components/Forms/Btn"
+import FormField from "../components/Forms/FormField"
+import Empty from "../components/Empty"
+import Content from "../components/Content"
+import { useFieldArray, useForm } from "react-hook-form"
+import { nanoid } from "nanoid"
 
 const Desktop: React.FC = () => {
+
+  const { control, register, handleSubmit, formState: { errors } } = useForm()
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "links"
+  })
+
+  console.log('errors', errors)
+
   return (
-    <div>
+    <Content>
       <h1>Customize your links</h1>
-      <ArticleText>Add/edit/remove links below and then share all your profiles with the world!</ArticleText>
+      <article className="article">Add/edit/remove links below and then share all your profiles with the world!</article>
 
-      <FormField>
-        <Btn text="+ Add new link" bordered expand />
-      </FormField>
+      <form onSubmit={handleSubmit(data => console.log(data))}>
+        
+        <FormField>
+          <Btn text="+ Add new link" bordered expand handler={() => append({ id: nanoid(), platform: "", link: "" })} />
+        </FormField>
 
-      <img src={empty} alt="" />
-      <div className="h1">Let's get you started</div>
-      <ArticleText>Use the “Add new link” button to get started. Once you have more than one link, you can reorder and edit them. We’re here to help you share your profiles with everyone!</ArticleText>
-    </div>
+        <ul>
+          {fields.map((item, index) => (
+            <li key={item.id}>
+              <select {...register(`links.${index}.platform`)}>
+                <option value="1">Select 1</option>
+                <option value="2">Select 2</option>
+                <option value="3">Select 3</option>
+              </select>
+              <input {...register(`links.${index}.link`, { required: 'dsadasda' })} />
+              <button type="button" onClick={() => remove(Number(item.id))}>Delete</button>
+            </li>
+          ))}
+        </ul>
+
+        <Btn type="submit" text="Save" />
+
+      </form>
+
+      <Empty />
+
+    </Content>
   )
 }
 

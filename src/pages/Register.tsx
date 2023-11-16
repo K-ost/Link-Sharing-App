@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
-import Btn from "../components/Btn"
-import FormField from "../components/FormField"
-import FormInput from "../components/FormInput"
+import Btn from "../components/Forms/Btn"
+import FormField from "../components/Forms/FormField"
+import FormInput from "../components/Forms/FormInput"
 import logo from "../assets/images/logo-devlinks-large.svg"
 
 const Register: React.FC = () => {
