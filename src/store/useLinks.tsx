@@ -16,7 +16,7 @@ export const useLinks = create<LinksState>()(
         setLink: (data) => set((state) => {
           return { links: [ ...state.links, ...data ] }
         }),
-        removeLink: (id) => console.log('1')
+        removeLink: (id) => console.log(id)
         //removeLink: () => set((state) => ({ auth: false }))
       }),
       // {
