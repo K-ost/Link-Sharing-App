@@ -75,12 +75,14 @@ const SelectBox: React.FC<ISelectBox> = ({ list, valid }) => {
           boxShadow: '0px 10px 20px 0px rgba(54, 78, 126, 0.25);',
           padding: '8px 0',
         }),
-        option: (base, props) => ({
+        option: (base, props) => {
+          console.log(props.label)
+          return {
           ...base,
           background: `${props.isSelected ? 'var(--color-purple)' : '0'}`,
           cursor: 'pointer',
           fontWeight: '500',
-        })
+        }}
       }}
     />
   )
