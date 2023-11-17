@@ -3,7 +3,7 @@ import Btn from "./Forms/Btn"
 import { useAuth } from "../store/useAuth"
 
 interface IContent {
-  btnText?: string
+  btn: React.ReactNode
   children: React.ReactNode
 }
 
@@ -26,7 +26,7 @@ const ContentBottom = styled.div`
   padding: var(--gap);
 `
 
-const Content: React.FC<IContent> = ({ btnText = 'Save', children }) => {
+const Content: React.FC<IContent> = ({ btn, children }) => {
   const setLogout = useAuth(state => state.setLogout)
 
   return (
@@ -36,7 +36,7 @@ const Content: React.FC<IContent> = ({ btnText = 'Save', children }) => {
       </ContentTop>
       <ContentBottom>
         <Btn text="Logout" bordered handler={setLogout} />
-        <Btn text={btnText} disabled />
+        {btn}
       </ContentBottom>
     </ContentBox>
   )

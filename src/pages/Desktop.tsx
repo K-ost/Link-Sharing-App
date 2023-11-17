@@ -8,7 +8,7 @@ import { useLinks } from "../store/useLinks"
 import { linksOptions } from "../helpers"
 
 const Desktop: React.FC = () => {
-  const { links, removeLink, setLink } = useLinks()
+  const { links, setLink } = useLinks()
 
   const { control, register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
@@ -24,37 +24,44 @@ const Desktop: React.FC = () => {
   const addLink = (data: any) => {
     setLink(data.links)
   }
+  
 
   return (
-    <Content>
+    <Content btn={<Btn text="Save" type="submit" handler={handleSubmit(addLink)} />}>
       <h1>Customize your links</h1>
       <article className="article">Add/edit/remove links below and then share all your profiles with the world!</article>
 
-      <form onSubmit={handleSubmit(addLink)}>
-        
+      <form>
+
         <FormField>
-          <Btn text="+ Add new link" bordered expand handler={() => append({ id: nanoid(), platform: "", link: "" })} />
+          <Btn text="+ Add new link" bordered expand handler={() => append({ id: nanoid(), platform: linksOptions[0].value, link: "" })} />
         </FormField>
 
         <ul>
           {fields.map((item, index) => (
             <li key={item.id}>
+              <p>Link #{index + 1}</p>
               <select {...register(`links.${index}.platform`)}>
                 {linksOptions.map(option => (
                   <option key={option.id} value={option.value}>{option.label}</option>
                 ))}
               </select>
-              <input {...register(`links.${index}.link`, { required: 'dsadasda' })} />
-              <button type="button" onClick={() => remove(Number(item.id))}>Delete</button>
+              <input {...register(`links.${index}.link`, {
+                required: "Can't be empty",
+                pattern: {
+                  value: /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/,
+                  message: "Please check the URL"
+                }
+              })} />
+              { errors.links && <p>{errors.links[index]?.link?.message}</p> }
+              <button type="button" onClick={() => remove(index)}>Delete</button>
             </li>
           ))}
         </ul>
 
-        <Btn type="submit" text="Save" />
-
       </form>
 
-      <Empty />
+      {!links.length && <Empty />}
 
     </Content>
   )
