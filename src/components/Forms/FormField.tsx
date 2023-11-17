@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 interface IFormField {
   children: React.ReactNode
+  className?: string
   label?: string
 }
 
@@ -10,7 +11,8 @@ const Field = styled.div`
   color: var(--color-grey);
   font-size: 12px;
   line-height: 18px;
-  margin: 0 0 24px;
+  margin: 0 0 var(--gap);
+  &.last { margin: 0; }
 `
 const FieldLabel = styled.label`
   color: var(--color-grey-dark);
@@ -20,9 +22,9 @@ const FieldLabel = styled.label`
   margin: 0 0 4px;
 `
 
-const FormField: React.FC<IFormField> = ({ children, label }) => {
+const FormField: React.FC<IFormField> = ({ children, className, label }) => {
   return (
-    <Field>
+    <Field className={className}>
       {label && <FieldLabel>{label}</FieldLabel>}
       {children}
     </Field>

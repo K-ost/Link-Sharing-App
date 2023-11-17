@@ -6,11 +6,12 @@ import lock from "../../assets/images/icon-password.svg"
 export type InputIconType = 'link' | 'mail' | 'lock' | null
 
 interface IFormInput {
-  error?: boolean
-  handler: () => void
+  error?: string
+  handler?: () => void
   icon?: InputIconType
   placeholder?: string
   type?: 'password' | 'text' | 'email'
+  valid?: any
 }
 
 // Styled
@@ -54,7 +55,7 @@ const Input = styled.input<{ $error: boolean, $icon: InputIconType }>`
   }
 `
 
-const FormInput: React.FC<IFormInput> = ({ handler, error = false, icon = null, placeholder, type = 'text' }) => {
+const FormInput: React.FC<IFormInput> = ({ handler, error = false, icon = null, placeholder, type = 'text', valid }) => {
   return (
     <InputWrap>
       <Input
@@ -63,8 +64,9 @@ const FormInput: React.FC<IFormInput> = ({ handler, error = false, icon = null, 
         $error={error}
         $icon={icon}
         placeholder={placeholder}
+        {...valid}
       />
-      {error && <InputError>Please check again</InputError>}
+      {error && <InputError>{error}</InputError>}
     </InputWrap>
   )
 }

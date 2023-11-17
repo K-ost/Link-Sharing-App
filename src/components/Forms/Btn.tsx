@@ -34,6 +34,7 @@ const Button = styled.button<{ $bordered: boolean, $expand: boolean }>`
     &:not(:disabled) {
       background: var(--color-${props => props.$bordered ? 'purple-light' : 'purple-hover'});
       border-color: var(--color-${props => props.$bordered ? 'purple' : 'purple-hover'});
+      box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
     }
   }
 `

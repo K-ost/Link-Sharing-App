@@ -5,7 +5,8 @@ import Content from "../components/Content"
 import { useFieldArray, useForm } from "react-hook-form"
 import { nanoid } from "nanoid"
 import { useLinks } from "../store/useLinks"
-import { linksOptions } from "../helpers"
+import { linksOptions, urlPattern } from "../helpers"
+import LinkItem from "../components/LinkItem"
 
 const Desktop: React.FC = () => {
   const { links, setLink } = useLinks()
@@ -37,31 +38,26 @@ const Desktop: React.FC = () => {
           <Btn text="+ Add new link" bordered expand handler={() => append({ id: nanoid(), platform: linksOptions[0].value, link: "" })} />
         </FormField>
 
-        <ul>
-          {fields.map((item, index) => (
-            <li key={item.id}>
-              <p>Link #{index + 1}</p>
-              <select {...register(`links.${index}.platform`)}>
-                {linksOptions.map(option => (
-                  <option key={option.id} value={option.value}>{option.label}</option>
-                ))}
-              </select>
-              <input {...register(`links.${index}.link`, {
-                required: "Can't be empty",
-                pattern: {
-                  value: /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/,
-                  message: "Please check the URL"
-                }
-              })} />
-              { errors.links && <p>{errors.links[index]?.link?.message}</p> }
-              <button type="button" onClick={() => remove(index)}>Delete</button>
-            </li>
-          ))}
-        </ul>
+        {fields.map((item, index) => (
+          <LinkItem
+            key={item.id}
+            index={index}
+            handlerSelect={register(`links.${index}.platform`)}
+            handlerInput={register(`links.${index}.link`, {
+              required: "Can't be empty",
+              pattern: {
+                value: urlPattern,
+                message: "Please check the URL"
+              }
+            })}
+            error={errors.links && errors.links[index]?.link?.message}
+            remove={remove}
+          />
+        ))}
 
       </form>
 
-      {!links.length && <Empty />}
+      {!fields.length && <Empty />}
 
     </Content>
   )

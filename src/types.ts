@@ -5,7 +5,6 @@ export type LinkType = {
 }
 
 export type LinkOptionType = {
-  id: number
   value: string
   label: string
 }

@@ -1,18 +1,20 @@
-import { LinkOptionType } from "./types";
+import { LinkOptionType } from "./types"
 
 export const linksOptions: LinkOptionType[] = [
-  { id: 1, label: "GitHub", value: "github" },
-  { id: 2, label: "Frontend Mentor", value: "frontend-mentor" },
-  { id: 3, label: "Twitter", value: "twitter" },
-  { id: 4, label: "LinkedIn", value: "linkedin" },
-  { id: 5, label: "YouTube", value: "youtube" },
-  { id: 6, label: "Facebook", value: "facebook" },
-  { id: 7, label: "Twitch", value: "twitch" },
-  { id: 8, label: "Dev.to", value: "devto" },
-  { id: 9, label: "Codewars", value: "codewars" },
-  { id: 10, label: "Codepen", value: "codepen" },
-  { id: 11, label: "freeCodeCamp", value: "freecodecamp" },
-  { id: 12, label: "GitLab", value: "gitlab" },
-  { id: 13, label: "Hashnode", value: "hashnode" },
-  { id: 14, label: "Stack Overflow", value: "stack-overflow" }
+  { label: "GitHub", value: "github" },
+  { label: "Frontend Mentor", value: "frontendMentor" },
+  { label: "Twitter", value: "twitter" },
+  { label: "LinkedIn", value: "linkedin" },
+  { label: "YouTube", value: "youtube" },
+  { label: "Facebook", value: "facebook" },
+  { label: "Twitch", value: "twitch" },
+  { label: "Dev.to", value: "devto" },
+  { label: "Codewars", value: "codewars" },
+  { label: "Codepen", value: "codepen" },
+  { label: "freeCodeCamp", value: "freecodecamp" },
+  { label: "GitLab", value: "gitlab" },
+  { label: "Hashnode", value: "hashnode" },
+  { label: "Stack Overflow", value: "stackOverflow" }
 ]
+
+export const urlPattern = /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/
