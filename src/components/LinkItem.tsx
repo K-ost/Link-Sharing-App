@@ -6,14 +6,20 @@ import drag from "../assets/images/icon-drag-and-drop.svg"
 import SelectBox from "./Forms/SelectBox"
 
 interface ILinkItem {
+  drag: any
+  error: string | undefined
   index: number
   handlerSelect: any
   handlerInput: any
-  error: string | undefined
+  over: boolean
   remove: (index: number) => void
 }
 
 // Styles
+const ItemBox = styled.div<{ $over: boolean }>`
+  background: var(--color-${props => props.$over ? 'purple-hover' : 'grey-light'});
+  ${props => props.$over && 'box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);'}
+`
 const ItemTop = styled.div`
   align-items: center;
   display: flex;
@@ -46,11 +52,11 @@ const ItemDelete = styled.button`
 `
 
 
-const LinkItem: React.FC<ILinkItem> = ({ error, index, handlerInput, handlerSelect, remove }) => {
+const LinkItem: React.FC<ILinkItem> = ({ drag, error, index, handlerInput, handlerSelect, over, remove }) => {
   return (
-    <div className="greybox">
+    <ItemBox $over={over} className="greybox">
       <ItemTop>
-        <ItemName>Link #{index + 1}</ItemName>
+        <ItemName {...drag}>Link #{index + 1}</ItemName>
         <ItemDelete className="resetBtn" onClick={() => remove(index)}>Remove</ItemDelete>
       </ItemTop>
 
@@ -61,7 +67,7 @@ const LinkItem: React.FC<ILinkItem> = ({ error, index, handlerInput, handlerSele
       <FormField label="Link" className="last">
         <FormInput icon="link" valid={handlerInput} error={error} />
       </FormField>
-    </div>
+    </ItemBox>
   )
 }
 

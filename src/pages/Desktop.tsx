@@ -1,5 +1,6 @@
 import Btn from "../components/Forms/Btn"
 import FormField from "../components/Forms/FormField"
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
 import Empty from "../components/Empty"
 import Content from "../components/Content"
 import { useFieldArray, useForm } from "react-hook-form"
@@ -9,21 +10,21 @@ import { linksOptions, urlPattern } from "../helpers"
 import LinkItem from "../components/LinkItem"
 
 const Desktop: React.FC = () => {
-  const { links, setLink } = useLinks()
+  const { links, setLinks, onDragEnd } = useLinks()
 
   const { control, register, handleSubmit, formState: { errors } } = useForm({
-    defaultValues: {
-      links
-    }
+    defaultValues: { links }
   })
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "links"
-  })
+  const { fields, append, remove } = useFieldArray({ control, name: "links" })
 
   // addLink
   const addLink = (data: any) => {
-    setLink(data.links)
+    setLinks(data.links)
+  }
+
+  // dragHandler
+  const dragHandler = (result: any) => {
+    onDragEnd(result, links)
   }
   
 
@@ -38,22 +39,40 @@ const Desktop: React.FC = () => {
           <Btn text="+ Add new link" bordered expand handler={() => append({ id: nanoid(), platform: linksOptions[0].value, link: "" })} />
         </FormField>
 
-        {fields.map((item, index) => (
-          <LinkItem
-            key={item.id}
-            index={index}
-            handlerSelect={register(`links.${index}.platform`)}
-            handlerInput={register(`links.${index}.link`, {
-              required: "Can't be empty",
-              pattern: {
-                value: urlPattern,
-                message: "Please check the URL"
-              }
-            })}
-            error={errors.links && errors.links[index]?.link?.message}
-            remove={remove}
-          />
-        ))}
+        <DragDropContext onDragEnd={dragHandler}>
+          <Droppable droppableId="droppable">
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {fields.map((item, index) => (
+                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        style={{marginBottom: 'var(--gap)', ...provided.draggableProps.style}}
+                      >
+                        <LinkItem
+                          key={item.id}
+                          index={index}
+                          handlerSelect={register(`links.${index}.platform`)}
+                          over={snapshot.isDragging}
+                          handlerInput={register(`links.${index}.link`, {
+                            required: "Can't be empty",
+                            pattern: { value: urlPattern, message: "Please check the URL" }
+                          })}
+                          error={errors.links && errors.links[index]?.link?.message}
+                          remove={remove}
+                          drag={provided.dragHandleProps}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
 
       </form>
 

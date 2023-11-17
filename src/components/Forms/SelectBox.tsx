@@ -76,7 +76,7 @@ const SelectBox: React.FC<ISelectBox> = ({ list, valid }) => {
           padding: '8px 0',
         }),
         option: (base, props) => {
-          console.log(props.label)
+          //console.log(props.label)
           return {
           ...base,
           background: `${props.isSelected ? 'var(--color-purple)' : '0'}`,
