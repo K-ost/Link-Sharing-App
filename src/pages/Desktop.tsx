@@ -8,14 +8,20 @@ import { nanoid } from "nanoid"
 import { useLinks } from "../store/useLinks"
 import { linksOptions, urlPattern } from "../helpers"
 import LinkItem from "../components/LinkItem"
+import { useEffect } from "react"
 
 const Desktop: React.FC = () => {
   const { links, setLinks, onDragEnd } = useLinks()
 
-  const { control, register, handleSubmit, formState: { errors } } = useForm({
+  useEffect(() => {
+    setValue('links', links)
+  }, [links])
+
+  // Form creating
+  const { control, register, handleSubmit, formState: { errors }, setValue } = useForm({
     defaultValues: { links }
   })
-  const { fields, append, remove } = useFieldArray({ control, name: "links" })
+  const { fields, prepend, remove } = useFieldArray({ control, name: "links" })
 
   // addLink
   const addLink = (data: any) => {
@@ -36,7 +42,7 @@ const Desktop: React.FC = () => {
       <form>
 
         <FormField>
-          <Btn text="+ Add new link" bordered expand handler={() => append({ id: nanoid(), platform: linksOptions[0].value, link: "" })} />
+          <Btn text="+ Add new link" bordered expand handler={() => prepend({ id: nanoid(), platform: linksOptions[0].value, link: "" })} />
         </FormField>
 
         <DragDropContext onDragEnd={dragHandler}>
