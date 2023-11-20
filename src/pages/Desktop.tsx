@@ -3,12 +3,14 @@ import FormField from "../components/Forms/FormField"
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
 import Empty from "../components/Empty"
 import Content from "../components/Content"
-import { useFieldArray, useForm } from "react-hook-form"
+import { Controller, useFieldArray, useForm } from "react-hook-form"
 import { nanoid } from "nanoid"
 import { useLinks } from "../store/useLinks"
 import { linksOptions, urlPattern } from "../helpers"
-import LinkItem from "../components/LinkItem"
+import { ItemBox, ItemDelete, ItemName, ItemTop } from "../components/LinkItemStyles"
 import { useEffect } from "react"
+import SelectBox from "../components/Forms/SelectBox"
+import FormInput from "../components/Forms/FormInput"
 
 const Desktop: React.FC = () => {
   const { links, setLinks, onDragEnd } = useLinks()
@@ -57,19 +59,32 @@ const Desktop: React.FC = () => {
                         {...provided.draggableProps}
                         style={{marginBottom: 'var(--gap)', ...provided.draggableProps.style}}
                       >
-                        <LinkItem
-                          key={item.id}
-                          index={index}
-                          handlerSelect={register(`links.${index}.platform`)}
-                          over={snapshot.isDragging}
-                          handlerInput={register(`links.${index}.link`, {
-                            required: "Can't be empty",
-                            pattern: { value: urlPattern, message: "Please check the URL" }
-                          })}
-                          error={errors.links && errors.links[index]?.link?.message}
-                          remove={remove}
-                          drag={provided.dragHandleProps}
-                        />
+                        <ItemBox $over={snapshot.isDragging} className="greybox" key={item.id}>
+                          <ItemTop>
+                            <ItemName {...provided.dragHandleProps}>Link #{index + 1}</ItemName>
+                            <ItemDelete className="resetBtn" onClick={() => remove(index)}>Remove</ItemDelete>
+                          </ItemTop>
+
+                          <FormField label="Platform">
+                            <Controller
+                              control={control}
+                              name={`links.${index}.platform`}
+                              render={({ field }) => <SelectBox list={linksOptions} valid={field} />}
+                              //rules={{ required: 'Reqired field' }}
+                            />
+                          </FormField>
+
+                          <FormField label="Link" className="last">
+                            <Controller
+                              control={control}
+                              name={`links.${index}.link`}
+                              render={({ field }) => (
+                                <FormInput icon="link" valid={field} error={errors.links && errors.links[index]?.link?.message} />
+                              )}
+                              rules={{ required: "Can't be empty", pattern: { value: urlPattern, message: "Please check the URL" } }}
+                            />
+                          </FormField>
+                        </ItemBox>
                       </div>
                     )}
                   </Draggable>

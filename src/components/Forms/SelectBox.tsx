@@ -25,6 +25,7 @@ const SelectBox: React.FC<ISelectBox> = ({ list, valid }) => {
     <Select
       options={list}
       isSearchable={false}
+      {...valid}
       styles={{
         control: (base, props) => ({
           ...base,
