@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { useLinks } from "../store/useLinks"
 
 // Styles
 const PreviewAva = styled.div`
@@ -35,8 +36,10 @@ const PreviewNameSkelet = styled.div<{ $type?: 'small' | 'medium' }>`
 `
 
 const PreviewScreen: React.FC = () => {
+  const links = useLinks(state => state.links)
   return (
     <div>
+      <pre>{JSON.stringify(links, null, 2)}</pre>
       <PreviewAva></PreviewAva>
       <PreviewName>
         <PreviewNameSkelet $type="medium" />
