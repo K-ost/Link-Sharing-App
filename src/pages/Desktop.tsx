@@ -35,8 +35,6 @@ const Desktop: React.FC = () => {
     onDragEnd(result, links)
   }
   
-  console.log(errors)
-  
 
   return (
     <Content btn={<Btn text="Save" type="submit" handler={handleSubmit(addLink)} />}>

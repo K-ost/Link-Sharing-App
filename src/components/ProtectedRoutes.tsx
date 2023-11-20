@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom"
 import styled from "styled-components"
 import Header, { HeaderBox } from "./Header"
 import preview from "../assets/images/illustration-phone-mockup.svg"
-import PreviewScreen from "./PreviewScreen"
+import PreviewScreen from "./Preview/PreviewScreen"
 
 interface IProtectedRoutes {
   isAuth: boolean
