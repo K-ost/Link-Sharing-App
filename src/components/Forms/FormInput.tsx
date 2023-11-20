@@ -15,10 +15,10 @@ interface IFormInput {
 }
 
 // Styled
-const InputWrap = styled.div`
+export const InputWrap = styled.div`
   position: relative;
 `
-const InputError = styled.div`
+export const InputError = styled.div`
   color: var(--color-red);
   font-size: 12px;
   line-height: 18px;

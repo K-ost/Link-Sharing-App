@@ -20,7 +20,7 @@ const Desktop: React.FC = () => {
   }, [links])
 
   // Form creating
-  const { control, register, handleSubmit, formState: { errors }, setValue } = useForm({
+  const { control, handleSubmit, formState: { errors }, setValue } = useForm({
     defaultValues: { links }
   })
   const { fields, prepend, remove } = useFieldArray({ control, name: "links" })
@@ -35,6 +35,8 @@ const Desktop: React.FC = () => {
     onDragEnd(result, links)
   }
   
+  console.log(errors)
+  
 
   return (
     <Content btn={<Btn text="Save" type="submit" handler={handleSubmit(addLink)} />}>
@@ -44,7 +46,11 @@ const Desktop: React.FC = () => {
       <form>
 
         <FormField>
-          <Btn text="+ Add new link" bordered expand handler={() => prepend({ id: nanoid(), platform: linksOptions[0].value, link: "" })} />
+          <Btn text="+ Add new link" bordered expand handler={() => prepend({
+            id: nanoid(),
+            platform: { value: linksOptions[0].value, label: linksOptions[0].label },
+            link: ""
+          })} />
         </FormField>
 
         <DragDropContext onDragEnd={dragHandler}>
@@ -70,7 +76,6 @@ const Desktop: React.FC = () => {
                               control={control}
                               name={`links.${index}.platform`}
                               render={({ field }) => <SelectBox list={linksOptions} valid={field} />}
-                              //rules={{ required: 'Reqired field' }}
                             />
                           </FormField>
 
@@ -79,7 +84,12 @@ const Desktop: React.FC = () => {
                               control={control}
                               name={`links.${index}.link`}
                               render={({ field }) => (
-                                <FormInput icon="link" valid={field} error={errors.links && errors.links[index]?.link?.message} />
+                                <FormInput
+                                  icon="link"
+                                  valid={field}
+                                  placeholder="e.g. https://www.github.com/johnappleseed"
+                                  error={errors.links && errors.links[index]?.link?.message}
+                                />
                               )}
                               rules={{ required: "Can't be empty", pattern: { value: urlPattern, message: "Please check the URL" } }}
                             />

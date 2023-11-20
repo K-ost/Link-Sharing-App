@@ -1,5 +1,6 @@
 import Select from 'react-select'
 import { SelectControlStyle, SelectMenuStyle, SelectOptionStyle } from './SelectBoxStyles'
+import { LinkOptionType } from '../../types'
 // import github from "../../assets/images/icon-github.svg"
 // import frontendMentor from "../../assets/images/icon-frontend-mentor.svg"
 // import twitter from "../../assets/images/icon-twitter.svg"
@@ -16,7 +17,7 @@ import { SelectControlStyle, SelectMenuStyle, SelectOptionStyle } from './Select
 // import stackOverflow from "../../assets/images/icon-stack-overflow.svg"
 
 interface ISelectBox {
-  list: any[]
+  list: LinkOptionType[]
   valid: any
 }
 
