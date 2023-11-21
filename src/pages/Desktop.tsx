@@ -23,7 +23,7 @@ const Desktop: React.FC = () => {
   const { control, handleSubmit, formState: { errors }, setValue } = useForm({
     defaultValues: { links }
   })
-  const { fields, prepend, remove } = useFieldArray({ control, name: "links" })
+  const { fields, append, remove } = useFieldArray({ control, name: "links" })
 
   // addLink
   const addLink = (data: any) => {
@@ -44,7 +44,7 @@ const Desktop: React.FC = () => {
       <form>
 
         <FormField>
-          <Btn text="+ Add new link" bordered expand handler={() => prepend({
+          <Btn text="+ Add new link" bordered expand handler={() => append({
             id: nanoid(),
             platform: { value: linksOptions[0].value, label: linksOptions[0].label },
             link: ""

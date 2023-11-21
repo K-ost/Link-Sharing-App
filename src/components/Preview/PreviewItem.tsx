@@ -1,20 +1,7 @@
 import styled from "styled-components"
 import { LinkOptionType } from "../../types"
 import arrowRight from "../../assets/images/icon-arrow-right.svg"
-import github from "../../assets/images/icon-github.svg"
-import frontendMentor from "../../assets/images/icon-frontend-mentor.svg"
-import twitter from "../../assets/images/icon-twitter.svg"
-import linkedin from "../../assets/images/icon-linkedin.svg"
-import youtube from "../../assets/images/icon-youtube.svg"
-import facebook from "../../assets/images/icon-facebook.svg"
-import twitch from "../../assets/images/icon-twitch.svg"
-import devto from "../../assets/images/icon-devto.svg"
-import codewars from "../../assets/images/icon-codewars.svg"
-import codepen from "../../assets/images/icon-codepen.svg"
-import freecodecamp from "../../assets/images/icon-freecodecamp.svg"
-import gitlab from "../../assets/images/icon-gitlab.svg"
-import hashnode from "../../assets/images/icon-hashnode.svg"
-import stackOverflow from "../../assets/images/icon-stack-overflow.svg"
+import arrowRightBlack from "../../assets/images/icon-arrow-right-black.svg"
 
 interface IPreviewItem {
   link: string
@@ -22,6 +9,12 @@ interface IPreviewItem {
 }
 
 // Styles
+const ItemImg = styled.div`
+  margin: 0 8px 0 0;
+  min-width: 20px;
+  max-width: 20px;
+  img { display: block; filter: brightness(0) invert(1); }
+`
 const Item = styled.div`
   align-items: center;
   background: var(--color-skelets);
@@ -32,52 +25,51 @@ const Item = styled.div`
   font-weight: 400;
   line-height: 18px;
   margin: 0 0 20px;
-  min-height: 44px;
-  padding: 11px 16px 11px 40px;
+  height: 44px;
+  padding: 11px 16px;
   position: relative;
-  &::before, &::after { content: ''; display: block; position: absolute; top: 50%; }
-  &::before {
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 20px;
-    left: 16px;
-    margin-top: -10px;
-    width: 20px;
-  }
+  &:last-child { margin: 0; }
   &::after {
     background: url(${arrowRight}) center no-repeat;
+    content: '';
+    display: block;
     height: 16px;
     margin-top: -8px;
+    position: absolute;
     right: 16px;
+    top: 50%;
     width: 16px;
   }
-  &.item-github {
-    background: #1A1A1A;
-    &::before { background-image: url(${github}); }
-  }
-  &.item-frontendMentor {
-    background: var(--color-white);
-    box-shadow: inset 0 0 0 1px #D9D9D9;
+  &.item-github { background-color: #1A1A1A; }
+  &.item-frontendmentor {
+    background-color: var(--color-white);
+    box-shadow: inset 0 0 0 1px var(--color-border);
     color: var(--color-grey-dark);
-    &::before { background-image: url(${frontendMentor}); }
+    &::after { background-image: url(${arrowRightBlack}); }
+    ${ItemImg} img { filter: none; }
   }
-  &.item-twitter {
-    background: #43B7E9;
-    &::before { background-image: url(${twitter}); }
-  }
-  &.item-linkedin {
-    background: #2D68FF;
-    &::before { background-image: url(${linkedin}); }
-  }
-  &.item-youtube {
-    background: #EE3939;
-    &::before { background-image: url(${youtube}); }
-  }
+  &.item-twitter { background-color: #43B7E9; }
+  &.item-linkedin { background-color: #2D68FF; }
+  &.item-youtube { background-color: #EE3939; }
+  &.item-facebook { background-color: #2442AC; }
+  &.item-twitch { background-color: #EE3FC8; }
+  &.item-devto { background-color: #333333; }
+  &.item-codewars { background-color: #8A1A50; }
+  &.item-codepen { background-color: #333333; }
+  &.item-freecodecamp { background-color: #302267; }
+  &.item-gitlab { background-color: #EB4925; }
+  &.item-hashnode { background-color: #0330D1; }
+  &.item-stackOverflow { background-color: #EC7100; }
 `
 
 const PreviewItem: React.FC<IPreviewItem> = ({ link, platform }) => {
+  const icon = `../../src/assets/images/icon-${platform.value}.svg`
+
   return (
     <Item className={`item-${platform.value}`}>
+      <ItemImg>
+        <img src={icon} alt="" />
+      </ItemImg>
       {platform.label}
     </Item>
   )

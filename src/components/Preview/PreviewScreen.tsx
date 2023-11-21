@@ -34,10 +34,19 @@ const PreviewNameSkelet = styled.div<{ $type?: 'small' | 'medium' }>`
   height: ${({ $type }) => $type === 'medium' ? '16px' : $type === 'small' ? '8px' : '44px'};
   margin: ${({ $type }) => $type === 'medium' ? '0 auto' : $type === 'small' ? '0 auto' : '0 0 20px'};
   width: ${({ $type }) => $type === 'medium' ? '160px' : $type === 'small' ? '72px' : 'auto'};
+  &:last-child { margin-bottom: 0; }
+`
+const PreviewList = styled.div`
+  height: calc(((44px + 20px) * 5) - 20px);
+  overflow: auto;
 `
 
 const PreviewScreen: React.FC = () => {
   const links = useLinks(state => state.links)
+
+  // skeletsRest
+  const skeletsRest = 5 - links.length
+
   return (
     <div>
       <PreviewAva></PreviewAva>
@@ -48,17 +57,11 @@ const PreviewScreen: React.FC = () => {
         <PreviewNameSkelet $type="small" />
       </PreviewEmail>
 
-      {links.map(el => <PreviewItem key={el.id} link={el.link} platform={el.platform} />)}
-      
-      {!links.length && 
-        <>
-          <PreviewNameSkelet />
-          <PreviewNameSkelet />
-          <PreviewNameSkelet />
-          <PreviewNameSkelet />
-          <PreviewNameSkelet />
-        </>
-      }
+      <PreviewList>
+        {links.map(el => <PreviewItem key={el.id} link={el.link} platform={el.platform} />)}
+        {(skeletsRest > 0) && Array.from(Array(skeletsRest)).map((el, index) => <PreviewNameSkelet key={index} />)}
+      </PreviewList>
+
     </div>
   )
 }
