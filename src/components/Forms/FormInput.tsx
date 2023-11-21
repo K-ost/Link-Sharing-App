@@ -2,11 +2,12 @@ import styled from "styled-components"
 import link from "../../assets/images/icon-link.svg"
 import mail from "../../assets/images/icon-email.svg"
 import lock from "../../assets/images/icon-password.svg"
+import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form"
 
 export type InputIconType = 'link' | 'mail' | 'lock' | null
 
 interface IFormInput {
-  error?: string
+  error?: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined
   handler?: () => void
   icon?: InputIconType
   placeholder?: string
@@ -67,7 +68,7 @@ const FormInput: React.FC<IFormInput> = ({ handler, error = false, icon = null, 
         placeholder={placeholder}
         {...valid}
       />
-      {error && <InputError>{error}</InputError>}
+      {error && <InputError>{error.toString()}</InputError>}
     </InputWrap>
   )
 }

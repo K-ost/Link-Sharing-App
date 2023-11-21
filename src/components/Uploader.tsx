@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import uploadImg from "../assets/images/icon-upload-image.svg"
+import { useState } from "react"
 
 // Styles
 const UploaderBox = styled.div`
@@ -34,13 +35,27 @@ const UploaderText = styled.div`
   line-height: 18px;
   flex: 1;
 `
+const UploaderFile = styled.input.attrs({ type: 'file' })`
+  cursor: pointer;
+  height: 193px;
+  left: 0;
+  opacity: 0;
+  top: 0;
+  position: absolute;
+  width: 193px;
+`
 
 const Uploader: React.FC = () => {
+  const [file, setFile] = useState<any>(null)
+
+  console.log(file)
+
   return (
     <UploaderBox className="greybox">
       <UploaderTitle>Profile picture</UploaderTitle>
       <UploaderPhoto>
         <div><UploaderPhotoIcon src={uploadImg} alt="" /> <span>+ Upload Image</span></div>
+        <UploaderFile onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFile(e.target.files![0])} />
       </UploaderPhoto>
       <UploaderText>Image must be below 1024x1024px. Use PNG or JPG format.</UploaderText>
     </UploaderBox>

@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { useLinks } from "../../store/useLinks"
 import PreviewItem from "./PreviewItem"
+import { useAuth } from "../../store/useAuth"
 
 // Styles
 const PreviewAva = styled.div`
@@ -17,16 +18,19 @@ const PreviewAva = styled.div`
   }
 `
 const PreviewName = styled.div`
+  color: var(--color-grey-dark);
   font-size: 18px;
   font-weight: 600;
   line-height: 27px;
   margin: 0 0 12px;
+  text-align: center;
 `
 const PreviewEmail = styled.div`
   font-size: 14px;
   font-weight: 400;
   line-height: 21px;
   margin: 0 0 56px;
+  text-align: center;
 `
 const PreviewNameSkelet = styled.div<{ $type?: 'small' | 'medium' }>`
   background: var(--color-skelets);
@@ -43,6 +47,7 @@ const PreviewList = styled.div`
 
 const PreviewScreen: React.FC = () => {
   const links = useLinks(state => state.links)
+  const profile = useAuth(state => state.profile)
 
   // skeletsRest
   const skeletsRest = 5 - links.length
@@ -51,15 +56,17 @@ const PreviewScreen: React.FC = () => {
     <div>
       <PreviewAva></PreviewAva>
       <PreviewName>
-        <PreviewNameSkelet $type="medium" />
+        {(!profile?.firstname && !profile?.lastname) && <PreviewNameSkelet $type="medium" />}
+        {profile?.firstname && profile.firstname} {profile?.lastname && profile.lastname}
       </PreviewName>
       <PreviewEmail>
-        <PreviewNameSkelet $type="small" />
+        {!profile?.email && <PreviewNameSkelet $type="small" />}
+        {profile?.email && profile.email}
       </PreviewEmail>
 
       <PreviewList>
         {links.map(el => <PreviewItem key={el.id} link={el.link} platform={el.platform} />)}
-        {(skeletsRest > 0) && Array.from(Array(skeletsRest)).map((el, index) => <PreviewNameSkelet key={index} />)}
+        {(skeletsRest > 0) && Array.from(Array(skeletsRest)).map((__, index) => <PreviewNameSkelet key={index} />)}
       </PreviewList>
 
     </div>

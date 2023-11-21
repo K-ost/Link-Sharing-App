@@ -9,3 +9,11 @@ export type LinkType = {
   platform: LinkOptionType
   link: string
 }
+
+export type UserType = {
+  email?: string
+  password?: string
+  firstname: string
+  lastname: string
+  photo?: any
+}

@@ -15,7 +15,7 @@ const ItemImg = styled.div`
   max-width: 20px;
   img { display: block; filter: brightness(0) invert(1); }
 `
-const Item = styled.div`
+const Item = styled.a`
   align-items: center;
   background: var(--color-skelets);
   border-radius: 8px;
@@ -29,6 +29,7 @@ const Item = styled.div`
   padding: 11px 16px;
   position: relative;
   &:last-child { margin: 0; }
+  &:hover { color: var(--color-white); }
   &::after {
     background: url(${arrowRight}) center no-repeat;
     content: '';
@@ -66,7 +67,7 @@ const PreviewItem: React.FC<IPreviewItem> = ({ link, platform }) => {
   const icon = `../../src/assets/images/icon-${platform.value}.svg`
 
   return (
-    <Item className={`item-${platform.value}`}>
+    <Item href={link} className={`item-${platform.value}`} target="_blank">
       <ItemImg>
         <img src={icon} alt="" />
       </ItemImg>
