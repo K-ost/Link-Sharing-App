@@ -46,7 +46,7 @@ const Desktop: React.FC = () => {
         <FormField>
           <Btn text="+ Add new link" bordered expand handler={() => append({
             id: nanoid(),
-            platform: { value: linksOptions[0].value, label: linksOptions[0].label },
+            platform: { value: linksOptions[0].value, label: linksOptions[0].label, icon: linksOptions[0].icon },
             link: ""
           })} />
         </FormField>

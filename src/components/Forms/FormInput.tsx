@@ -17,6 +17,7 @@ interface IFormInput {
 // Styled
 export const InputWrap = styled.div`
   position: relative;
+  width: 100%;
 `
 export const InputError = styled.div`
   color: var(--color-red);
@@ -38,7 +39,7 @@ const Input = styled.input<{ $error: boolean, $icon: InputIconType }>`
     'none'
   };
   border-radius: 8px;
-  border: 1px solid ${props => props.$error ? 'var(--color-red)' : 'var(--color-border)'};
+  border: 1px solid ${props => props.$error ? 'var(--color-red) !important' : 'var(--color-border)'};
   color: ${props => props.$error ? 'var(--color-red)' : '#4C4C4C'};
   font-family: var(--ff);
   font-size: var(--fs);

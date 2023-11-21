@@ -1,31 +1,48 @@
-import Select from 'react-select'
-import { SelectControlStyle, SelectMenuStyle, SelectOptionStyle } from './SelectBoxStyles'
+import Select, { components } from 'react-select'
+import { SelectControlStyle, SelectMenuStyle, SelectOptionStyle, IndicatorStyle } from './SelectBoxStyles'
 import { LinkOptionType } from '../../types'
-// import github from "../../assets/images/icon-github.svg"
-// import frontendMentor from "../../assets/images/icon-frontend-mentor.svg"
-// import twitter from "../../assets/images/icon-twitter.svg"
-// import linkedin from "../../assets/images/icon-linkedin.svg"
-// import youtube from "../../assets/images/icon-youtube.svg"
-// import facebook from "../../assets/images/icon-facebook.svg"
-// import twitch from "../../assets/images/icon-twitch.svg"
-// import devto from "../../assets/images/icon-devto.svg"
-// import codewars from "../../assets/images/icon-codewars.svg"
-// import codepen from "../../assets/images/icon-codepen.svg"
-// import freecodecamp from "../../assets/images/icon-freecodecamp.svg"
-// import gitlab from "../../assets/images/icon-gitlab.svg"
-// import hashnode from "../../assets/images/icon-hashnode.svg"
-// import stackOverflow from "../../assets/images/icon-stack-overflow.svg"
 
 interface ISelectBox {
   list: LinkOptionType[]
   valid: any
 }
 
+// Select icon
+const selectIcon = { maxHeight: '16px', display: 'block', marginRight: '12px', width: '16px' }
+
+// Component
 const SelectBox: React.FC<ISelectBox> = ({ list, valid }) => {
+
+  // Curstom option
+  const { Option, SingleValue } = components
+  const IconOption = (props: any) => (
+    <Option {...props}>
+      <img
+        src={`../../src/assets/images/icon-${props.data.icon}`}
+        style={selectIcon}
+        alt={props.data.label}
+      />
+      {props.data.label}
+    </Option>
+  )
+  const IconControl = (props: any) => {
+    const currentValue = props.getValue()[0]
+    return <SingleValue {...props}>
+      <img
+        src={`../../src/assets/images/icon-${currentValue.icon}`}
+        style={selectIcon}
+        alt={currentValue.label}
+      />
+      {currentValue.label}
+    </SingleValue>
+  }
+  
   return (
     <Select
       options={list}
       isSearchable={false}
+      components={{ Option: IconOption, SingleValue: IconControl }}
+      maxMenuHeight={200}
       {...valid}
       styles={{
         control: (base, props) => ({
@@ -36,20 +53,37 @@ const SelectBox: React.FC<ISelectBox> = ({ list, valid }) => {
         }),
         valueContainer: (base) => ({
           ...base,
-          padding: '0 0 0 44px'
+          padding: '0 14px'
         }),
+        dropdownIndicator(base, props) {
+          const opened = props.selectProps.menuIsOpen
+          return {
+            ...base,
+            ...IndicatorStyle,
+            transform: opened ? 'matrix(1,0,0,-1,0,0)' : 'none'
+          }
+        },
         indicatorSeparator: () => ({}),
         singleValue: (base) => ({
-          ...base, color: `#4C4C4C`
+          ...base,
+          alignItems: 'center',
+          color: `#4C4C4C`,
+          display: 'flex',
         }),
         menu: (base) => ({
           ...base,
           ...SelectMenuStyle
         }),
-        option: (base, props) => ({
-          ...base,
-          ...SelectOptionStyle
-        })
+        option: (base, props) => {
+          return {
+            ...base,
+            ...SelectOptionStyle,
+            color: props.isSelected ? 'var(--color-purple)' : 'var(--color-grey-dark)',
+            'img': {
+              fill: props.isSelected ? 'var(--color-purple)' : '0'
+            }
+          }
+        }
       }}
     />
   )
