@@ -1,6 +1,11 @@
 import styled from "styled-components"
 import uploadImg from "../assets/images/icon-upload-image.svg"
-import { useState } from "react"
+import React, { useState } from "react"
+import { useAuth } from "../store/useAuth"
+
+interface IUploader {
+  setPhoto: React.Dispatch<React.SetStateAction<string>>
+}
 
 // Styles
 const UploaderBox = styled.div`
@@ -45,17 +50,20 @@ const UploaderFile = styled.input.attrs({ type: 'file' })`
   width: 193px;
 `
 
-const Uploader: React.FC = () => {
-  const [file, setFile] = useState<any>(null)
-
-  console.log(file)
+const Uploader: React.FC<IUploader> = ({ setPhoto }) => {
+  const photo = useAuth(state => state.profile?.photo)
+  
+  const uploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoto(URL.createObjectURL(e.target.files![0]))
+  }
 
   return (
     <UploaderBox className="greybox">
       <UploaderTitle>Profile picture</UploaderTitle>
       <UploaderPhoto>
+        {photo && <img src={photo} alt="" />}
         <div><UploaderPhotoIcon src={uploadImg} alt="" /> <span>+ Upload Image</span></div>
-        <UploaderFile onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFile(e.target.files![0])} />
+        <UploaderFile onChange={uploadHandler} />
       </UploaderPhoto>
       <UploaderText>Image must be below 1024x1024px. Use PNG or JPG format.</UploaderText>
     </UploaderBox>

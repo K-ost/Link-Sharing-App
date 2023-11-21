@@ -19,7 +19,7 @@ export const useAuth = create<AuthState>()(
         setLogin: () => set(() => ({ auth: true })),
         setLogout: () => set(() => ({ auth: false })),
         updateProfile: (data) => {
-          const updatedProfile = { ...data, password: '1234567', photo: '' } as UserType
+          const updatedProfile = { ...data, password: '' } as UserType
           return set(() => ({ profile: updatedProfile }))
         }
       }),

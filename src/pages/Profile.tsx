@@ -5,9 +5,11 @@ import FormField from "../components/Forms/FormField"
 import FormInput from "../components/Forms/FormInput"
 import Uploader from "../components/Uploader"
 import { useAuth } from "../store/useAuth"
+import { useState } from "react"
 
 const Profile: React.FC = () => {
   const { profile, updateProfile } = useAuth()
+  const [photo, setPhoto] = useState<any>(null)
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       firstname: profile?.firstname,
@@ -18,7 +20,7 @@ const Profile: React.FC = () => {
 
   // saveUser
   const saveUser = (data: any) => {
-    updateProfile(data)
+    updateProfile({ ...data, photo })
   }
 
   return (
@@ -26,7 +28,7 @@ const Profile: React.FC = () => {
       <h1>Profile Details</h1>
       <article className="article">Add your details to create a personal touch to your profile.</article>
 
-      <Uploader />
+      <Uploader setPhoto={setPhoto} />
 
       <div className="greybox">
         <FormField label="First name*" line>

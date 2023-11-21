@@ -54,7 +54,9 @@ const PreviewScreen: React.FC = () => {
 
   return (
     <div>
-      <PreviewAva></PreviewAva>
+      <PreviewAva>
+        {profile?.photo && <img src={profile.photo} alt="" />}
+      </PreviewAva>
       <PreviewName>
         {(!profile?.firstname && !profile?.lastname) && <PreviewNameSkelet $type="medium" />}
         {profile?.firstname && profile.firstname} {profile?.lastname && profile.lastname}
