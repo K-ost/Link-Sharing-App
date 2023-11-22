@@ -28,8 +28,9 @@ const PreviewName = styled.div`
 const PreviewEmail = styled.div`
   font-size: 14px;
   font-weight: 400;
-  line-height: 21px;
-  margin: 0 0 56px;
+  line-height: 18px;
+  margin: 0 0 50px;
+  min-height: 18px;
   text-align: center;
 `
 const PreviewNameSkelet = styled.div<{ $type?: 'small' | 'medium' }>`

@@ -3,13 +3,13 @@ import Content from "../components/Content"
 import Btn from "../components/Forms/Btn"
 import FormField from "../components/Forms/FormField"
 import FormInput from "../components/Forms/FormInput"
-import Uploader from "../components/Uploader"
+import Uploader from "../components/Uploader/Uploader"
 import { useAuth } from "../store/useAuth"
 import { useState } from "react"
 
 const Profile: React.FC = () => {
   const { profile, updateProfile } = useAuth()
-  const [photo, setPhoto] = useState<any>(null)
+  const [photo, setPhoto] = useState<any>(profile?.photo)
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       firstname: profile?.firstname,

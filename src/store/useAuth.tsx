@@ -17,7 +17,7 @@ export const useAuth = create<AuthState>()(
         auth: false,
         profile: null,
         setLogin: () => set(() => ({ auth: true })),
-        setLogout: () => set(() => ({ auth: false })),
+        setLogout: () => set(() => ({ auth: false, profile: null })),
         updateProfile: (data) => {
           const updatedProfile = { ...data, password: '' } as UserType
           return set(() => ({ profile: updatedProfile }))
