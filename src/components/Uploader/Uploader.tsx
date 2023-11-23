@@ -16,7 +16,13 @@ const UploaderBox = styled.div`
   margin: 0 0 var(--gap);
 `
 const UploaderTitle = styled.div`
-  width: 45%;
+  margin: 0 16px 0 0;
+  min-width: var(--labelw);
+`
+const UploaderBody = styled.div`
+  align-items: center;
+  display: flex;
+  flex: 1;
 `
 const UploaderText = styled.div`
   font-size: 12px;
@@ -57,7 +63,7 @@ const UploaderPhoto = styled.div`
   color: var(--color-purple);
   font-weight: 600;
   height: ${size};
-  margin: 0 var(--gap);
+  margin: 0 var(--gap) 0 0;
   min-width: ${size};
   position: relative;
   text-decoration: center;
@@ -85,14 +91,16 @@ const Uploader: React.FC<IUploader> = ({ setPhoto }) => {
   return (
     <UploaderBox className="greybox">
       <UploaderTitle>Profile picture</UploaderTitle>
-      <UploaderPhoto>
-        {file && <UploaderPhotoImg src={file} alt="" />}
-        <UploaderInner $loaded={!!file}>
-          <div>{!!file ? 'Change' : '+ Upload'} Image</div>
-        </UploaderInner>
-        <InputFile onChange={uploadHandler} />
-      </UploaderPhoto>
-      <UploaderText>Image must be below 1024x1024px. Use PNG or JPG format.</UploaderText>
+      <UploaderBody>
+        <UploaderPhoto>
+          {file && <UploaderPhotoImg src={file} alt="" />}
+          <UploaderInner $loaded={!!file}>
+            <div>{!!file ? 'Change' : '+ Upload'} Image</div>
+          </UploaderInner>
+          <InputFile onChange={uploadHandler} />
+        </UploaderPhoto>
+        <UploaderText>Image must be below 1024x1024px. Use PNG or JPG format.</UploaderText>
+      </UploaderBody>
     </UploaderBox>
   )
 }

@@ -12,7 +12,7 @@ interface IProtectedRoutes {
 const AppWrap = styled.div`
   height: 100vh;
   padding: var(--gap);
-  display: grid; 
+  display: grid;
   grid-template-columns: 0.8fr 1.2fr;
   grid-template-rows: auto 1fr;
   gap: var(--gap);
@@ -23,6 +23,11 @@ const AppWrap = styled.div`
   ${HeaderBox} { grid-area: Header; }
   .module-preview { grid-area: Preview; display: flex; align-items: center; justify-content: center; }
   .module-content { grid-area: Content; padding: 0; overflow: hidden; }
+  @media screen and (max-width: 1020px) {
+    display: flex; flex-direction: column;
+    .module-preview { display: none; }
+    .module-content { flex: 1; }
+  }
 `
 const PreviewWrap = styled.div`
   background: url(${preview}) 0 0 no-repeat;

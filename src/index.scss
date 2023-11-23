@@ -16,6 +16,7 @@
   --fs: 16px;
   --gap: 24px;
   --ava: 96px;
+  --labelw: 35%;
   --module-gap: 40px;
 }
 
@@ -59,7 +60,6 @@ h1, .h1 {
   cursor: pointer;
   margin: 0;
   padding: 0;
-  -webkit-appearance: none;
 }
 
 /* container-short */
@@ -101,6 +101,3 @@ h1, .h1 {
   padding: 20px;
   .h1 { margin: 0 0 var(--gap); }
 }
-
-
-

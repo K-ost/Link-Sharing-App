@@ -21,7 +21,7 @@ const Header: React.FC = () => {
         <img src={logo} alt="" />
       </HeaderLogo>
       <Nav />
-      <Btn text="Preview" bordered />
+      <Btn to="/preview" text="Preview" bordered />
     </HeaderBox>
   )
 }

@@ -25,7 +25,7 @@ const FieldLabel = styled.label<{ $lined: boolean }>`
   margin: 0 0 4px;
   ${props => props.$lined && `
     margin: 0 16px 0 0;
-    width: 45%;
+    min-width: var(--labelw);
   `}
 `
 

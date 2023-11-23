@@ -8,12 +8,13 @@ const PreviewAva = styled.div`
   background: var(--color-skelets);
   border-radius: var(--ava);
   height: var(--ava);
-  margin: 0 auto var(--gap);
+  margin: 0 auto 16px;
   width: var(--ava);
   img {
     display: block;
     border-radius: var(--ava);
     height: var(--ava);
+    object-fit: cover;
     width: var(--ava);
   }
 `
@@ -22,14 +23,14 @@ const PreviewName = styled.div`
   font-size: 18px;
   font-weight: 600;
   line-height: 27px;
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   text-align: center;
 `
 const PreviewEmail = styled.div`
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
-  margin: 0 0 50px;
+  margin: 0 0 44px;
   min-height: 18px;
   text-align: center;
 `

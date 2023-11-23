@@ -6,6 +6,7 @@ import Register from "./pages/Register"
 import ProtectedRoutes from "./components/ProtectedRoutes"
 import PublicRoutes from "./components/PublicRoutes"
 import { useAuth } from "./store/useAuth"
+import Preview from "./pages/Preview"
 
 function App() {
   const isAuth = useAuth(state => state.auth)
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<ProtectedRoutes isAuth={isAuth} />}>
           <Route index path="/" element={<Desktop />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/preview" element={<Preview />} />
         </Route>
         <Route path="/" element={<PublicRoutes isAuth={isAuth} />}>
           <Route path="/login" element={<Login />} />
