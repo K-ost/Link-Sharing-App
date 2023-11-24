@@ -11,6 +11,7 @@ import { ItemBox, ItemDelete, ItemName, ItemTop } from "../components/LinkItemSt
 import { useEffect } from "react"
 import SelectBox from "../components/Forms/SelectBox"
 import FormInput from "../components/Forms/FormInput"
+import Template from "../components/Template"
 
 const Desktop: React.FC = () => {
   const { links, setLinks, onDragEnd } = useLinks()
@@ -37,77 +38,79 @@ const Desktop: React.FC = () => {
   
 
   return (
-    <Content btn={<Btn text="Save" type="submit" handler={handleSubmit(addLink)} />}>
-      <h1>Customize your links</h1>
-      <article className="article">Add/edit/remove links below and then share all your profiles with the world!</article>
+    <Template>
+      <Content btn={<Btn text="Save" type="submit" handler={handleSubmit(addLink)} />}>
+        <h1>Customize your links</h1>
+        <article className="article">Add/edit/remove links below and then share all your profiles with the world!</article>
 
-      <form>
+        <form>
 
-        <FormField>
-          <Btn text="+ Add new link" bordered expand handler={() => append({
-            id: nanoid(),
-            platform: { value: linksOptions[0].value, label: linksOptions[0].label, icon: linksOptions[0].icon },
-            link: ""
-          })} />
-        </FormField>
+          <FormField>
+            <Btn text="+ Add new link" bordered expand handler={() => append({
+              id: nanoid(),
+              platform: { value: linksOptions[0].value, label: linksOptions[0].label, icon: linksOptions[0].icon },
+              link: ""
+            })} />
+          </FormField>
 
-        <DragDropContext onDragEnd={dragHandler}>
-          <Droppable droppableId="droppable">
-            {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                {fields.map((item, index) => (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        style={{marginBottom: 'var(--gap)', ...provided.draggableProps.style}}
-                      >
-                        <ItemBox $over={snapshot.isDragging} className="greybox" key={item.id}>
-                          <ItemTop>
-                            <ItemName {...provided.dragHandleProps}>Link #{index + 1}</ItemName>
-                            <ItemDelete className="resetBtn" onClick={() => remove(index)}>Remove</ItemDelete>
-                          </ItemTop>
+          <DragDropContext onDragEnd={dragHandler}>
+            <Droppable droppableId="droppable">
+              {(provided) => (
+                <div {...provided.droppableProps} ref={provided.innerRef}>
+                  {fields.map((item, index) => (
+                    <Draggable key={item.id} draggableId={item.id} index={index}>
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          style={{marginBottom: 'var(--gap)', ...provided.draggableProps.style}}
+                        >
+                          <ItemBox $over={snapshot.isDragging} className="greybox" key={item.id}>
+                            <ItemTop>
+                              <ItemName {...provided.dragHandleProps}>Link #{index + 1}</ItemName>
+                              <ItemDelete className="resetBtn" onClick={() => remove(index)}>Remove</ItemDelete>
+                            </ItemTop>
 
-                          <FormField label="Platform">
-                            <Controller
-                              control={control}
-                              name={`links.${index}.platform`}
-                              render={({ field }) => <SelectBox list={linksOptions} valid={field} />}
-                            />
-                          </FormField>
+                            <FormField label="Platform">
+                              <Controller
+                                control={control}
+                                name={`links.${index}.platform`}
+                                render={({ field }) => <SelectBox list={linksOptions} valid={field} />}
+                              />
+                            </FormField>
 
-                          <FormField label="Link" className="last">
-                            <Controller
-                              control={control}
-                              name={`links.${index}.link`}
-                              render={({ field }) => (
-                                <FormInput
-                                  icon="link"
-                                  valid={field}
-                                  placeholder="e.g. https://www.github.com/johnappleseed"
-                                  error={errors.links && errors.links[index]?.link?.message}
-                                />
-                              )}
-                              rules={{ required: "Can't be empty", pattern: { value: urlPattern, message: "Please check the URL" } }}
-                            />
-                          </FormField>
-                        </ItemBox>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+                            <FormField label="Link" className="last">
+                              <Controller
+                                control={control}
+                                name={`links.${index}.link`}
+                                render={({ field }) => (
+                                  <FormInput
+                                    icon="link"
+                                    valid={field}
+                                    placeholder="e.g. https://www.github.com/johnappleseed"
+                                    error={errors.links && errors.links[index]?.link?.message}
+                                  />
+                                )}
+                                rules={{ required: "Can't be empty", pattern: { value: urlPattern, message: "Please check the URL" } }}
+                              />
+                            </FormField>
+                          </ItemBox>
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
 
-      </form>
+        </form>
 
-      {!fields.length && <Empty />}
+        {!fields.length && <Empty />}
 
-    </Content>
+      </Content>
+    </Template>
   )
 }
 

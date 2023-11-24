@@ -6,6 +6,7 @@ import FormInput from "../components/Forms/FormInput"
 import Uploader from "../components/Uploader/Uploader"
 import { useAuth } from "../store/useAuth"
 import { useState } from "react"
+import Template from "../components/Template"
 
 const Profile: React.FC = () => {
   const { profile, updateProfile } = useAuth()
@@ -24,35 +25,37 @@ const Profile: React.FC = () => {
   }
 
   return (
-    <Content btn={<Btn text="Save" handler={handleSubmit(saveUser)} />}>
-      <h1>Profile Details</h1>
-      <article className="article">Add your details to create a personal touch to your profile.</article>
+    <Template>
+      <Content btn={<Btn text="Save" handler={handleSubmit(saveUser)} />}>
+        <h1>Profile Details</h1>
+        <article className="article">Add your details to create a personal touch to your profile.</article>
 
-      <Uploader setPhoto={setPhoto} />
+        <Uploader setPhoto={setPhoto} />
 
-      <div className="greybox">
-        <FormField label="First name*" line>
-          <FormInput
-            placeholder="e.g. John"
-            valid={register('firstname', { required: "Can't be empty" })}
-            error={errors.firstname && errors.firstname?.message}
-          />
-        </FormField>
-        <FormField label="Last name*" line>
-          <FormInput
-            placeholder="e.g. Appleseed"
-            valid={register('lastname', { required: "Can't be empty" })}
-            error={errors.lastname && errors.lastname?.message}
-          />
-        </FormField>
-        <FormField label="Email" line>
-          <FormInput
-            placeholder="e.g. email@example.com"
-            valid={register('email')}
-          />
-        </FormField>
-      </div>
-    </Content>
+        <div className="greybox">
+          <FormField label="First name*" line>
+            <FormInput
+              placeholder="e.g. John"
+              valid={register('firstname', { required: "Can't be empty" })}
+              error={errors.firstname && errors.firstname?.message}
+            />
+          </FormField>
+          <FormField label="Last name*" line>
+            <FormInput
+              placeholder="e.g. Appleseed"
+              valid={register('lastname', { required: "Can't be empty" })}
+              error={errors.lastname && errors.lastname?.message}
+            />
+          </FormField>
+          <FormField label="Email" line>
+            <FormInput
+              placeholder="e.g. email@example.com"
+              valid={register('email')}
+            />
+          </FormField>
+        </div>
+      </Content>
+    </Template>
   )
 }
 
