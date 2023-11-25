@@ -7,23 +7,25 @@ import ProtectedRoutes from "./components/ProtectedRoutes"
 import PublicRoutes from "./components/PublicRoutes"
 import { useAuth } from "./store/useAuth"
 import Preview from "./pages/Preview"
+import ResponseBox from "./components/ResponseBox"
 
 function App() {
-  const isAuth = useAuth(state => state.auth)
+  const { auth } = useAuth()
 
   return (
     <div>
       <Routes>
-        <Route path="/" element={<ProtectedRoutes isAuth={isAuth} />}>
+        <Route path="/" element={<ProtectedRoutes isAuth={auth} />}>
           <Route index path="/" element={<Desktop />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/preview" element={<Preview />} />
         </Route>
-        <Route path="/" element={<PublicRoutes isAuth={isAuth} />}>
+        <Route path="/" element={<PublicRoutes isAuth={auth} />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
+      <ResponseBox />
     </div>
   )
 }
