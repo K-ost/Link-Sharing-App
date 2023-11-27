@@ -5,41 +5,51 @@ import Empty from "../components/Empty"
 import Content from "../components/Content"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
 import { nanoid } from "nanoid"
-import { useLinks } from "../store/useLinks"
 import { linksOptions, urlPattern } from "../helpers"
 import { ItemBox, ItemDelete, ItemName, ItemTop } from "../components/LinkItemStyles"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import SelectBox from "../components/Forms/SelectBox"
 import FormInput from "../components/Forms/FormInput"
 import Template from "../components/Template"
+import { useAuth } from "../store/useApp"
+import { LinkType } from "../types"
 
 const Desktop: React.FC = () => {
-  const { links, setLinks, onDragEnd } = useLinks()
+  const { updateLinks, auth } = useAuth()
+  const [stateLinks, setStateLinks] = useState<LinkType[]>([])
+  
+  useEffect(() => {
+    setStateLinks(auth!.links)
+  }, [auth])
 
   useEffect(() => {
-    setValue('links', links)
-  }, [links])
+    setValue('links', stateLinks)
+  }, [auth, stateLinks])
 
   // Form creating
   const { control, handleSubmit, formState: { errors }, setValue } = useForm({
-    defaultValues: { links }
+    defaultValues: { links: stateLinks }
   })
   const { fields, append, remove } = useFieldArray({ control, name: "links" })
 
-  // addLink
-  const addLink = (data: any) => {
-    setLinks(data.links)
+  // addLinks
+  const addLinks = (data: any) => {
+    updateLinks(data.links, auth?.id!)
   }
 
   // dragHandler
   const dragHandler = (result: any) => {
-    onDragEnd(result, links)
+    if (!result.destination) return
+    const copy = Array.from(fields)
+    const [removed] = copy.splice(result.source.index, 1)
+    copy.splice(result.destination.index, 0, removed)
+    setStateLinks(copy)
   }
   
 
   return (
     <Template>
-      <Content btn={<Btn text="Save" type="submit" handler={handleSubmit(addLink)} />}>
+      <Content btn={<Btn text="Save" type="submit" handler={handleSubmit(addLinks)} />}>
         <h1>Customize your links</h1>
         <article className="article">Add/edit/remove links below and then share all your profiles with the world!</article>
 

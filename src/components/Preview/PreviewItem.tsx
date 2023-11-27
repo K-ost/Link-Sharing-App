@@ -60,7 +60,7 @@ const Item = styled.a`
   &.item-freecodecamp { background-color: #302267; }
   &.item-gitlab { background-color: #EB4925; }
   &.item-hashnode { background-color: #0330D1; }
-  &.item-stackOverflow { background-color: #EC7100; }
+  &.item-stackoverflow { background-color: #EC7100; }
 `
 
 const PreviewItem: React.FC<IPreviewItem> = ({ link, platform }) => {

@@ -17,6 +17,7 @@ export type UserType = {
   firstname: string
   lastname: string
   photo?: any
+  links: LinkType[]
 }
 
 export type SignUpType = {

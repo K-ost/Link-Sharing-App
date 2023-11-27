@@ -4,24 +4,24 @@ import Btn from "../components/Forms/Btn"
 import FormField from "../components/Forms/FormField"
 import FormInput from "../components/Forms/FormInput"
 import Uploader from "../components/Uploader/Uploader"
-import { useAuth } from "../store/useAuth"
 import { useState } from "react"
 import Template from "../components/Template"
+import { useAuth } from "../store/useApp"
 
 const Profile: React.FC = () => {
-  const { profile, updateProfile } = useAuth()
-  const [photo, setPhoto] = useState<any>(profile?.photo)
+  const { auth, updateProfile } = useAuth()
+  const [photo, setPhoto] = useState<any>(auth?.photo)
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      firstname: profile?.firstname,
-      lastname: profile?.lastname,
-      email: profile?.email
+      firstname: auth?.firstname,
+      lastname: auth?.lastname,
+      email: auth?.email
     }
   })
 
   // saveUser
   const saveUser = (data: any) => {
-    updateProfile({ ...data, photo })
+    updateProfile({ ...data, photo }, auth?.id!)
   }
 
   return (
@@ -40,17 +40,21 @@ const Profile: React.FC = () => {
               error={errors.firstname && errors.firstname?.message}
             />
           </FormField>
-          <FormField label="Last name*" line>
+          <FormField label="Last name" line>
             <FormInput
               placeholder="e.g. Appleseed"
-              valid={register('lastname', { required: "Can't be empty" })}
+              valid={register('lastname')}
               error={errors.lastname && errors.lastname?.message}
             />
           </FormField>
-          <FormField label="Email" line>
+          <FormField label="Email*" line>
             <FormInput
               placeholder="e.g. email@example.com"
-              valid={register('email')}
+              valid={register('email', {
+                required: 'Required field',
+                pattern: { message: 'E-mail must be correct', value: /^\S+@\S+$/i }
+              })}
+              error={errors.email && errors.email?.message}
             />
           </FormField>
         </div>

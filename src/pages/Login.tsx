@@ -3,7 +3,7 @@ import Btn from "../components/Forms/Btn"
 import FormField from "../components/Forms/FormField"
 import FormInput from "../components/Forms/FormInput"
 import logo from "../assets/images/logo-devlinks-large.svg"
-import { useAuth } from "../store/useAuth"
+import { useAuth } from "../store/useApp"
 import { useForm } from "react-hook-form"
 
 const Login: React.FC = () => {

@@ -4,7 +4,7 @@ import FormField from "../components/Forms/FormField"
 import FormInput from "../components/Forms/FormInput"
 import logo from "../assets/images/logo-devlinks-large.svg"
 import { useForm } from "react-hook-form"
-import { useAuth } from "../store/useAuth"
+import { useAuth } from "../store/useApp"
 
 const Register: React.FC = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm()

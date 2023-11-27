@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import styled from "styled-components"
-import { useAuth } from "../store/useAuth"
+import { useAuth } from "../store/useApp"
 
 // Styles
 const Response = styled.div<{ $show: boolean }>`

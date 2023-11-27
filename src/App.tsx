@@ -5,7 +5,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import ProtectedRoutes from "./components/ProtectedRoutes"
 import PublicRoutes from "./components/PublicRoutes"
-import { useAuth } from "./store/useAuth"
+import { useAuth } from "./store/useApp"
 import Preview from "./pages/Preview"
 import ResponseBox from "./components/ResponseBox"
 

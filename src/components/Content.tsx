@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Btn from "./Forms/Btn"
-import { useAuth } from "../store/useAuth"
+import { useAuth } from "../store/useApp"
 
 interface IContent {
   btn: React.ReactNode

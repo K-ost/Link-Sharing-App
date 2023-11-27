@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import React, { useState } from "react"
-import { useAuth } from "../../store/useAuth"
+import { useAuth } from "../../store/useApp"
 import uploadImg from "../../assets/images/icon-upload-image.svg"
 import uploadImgWhite from "../../assets/images/icon-upload-white.svg"
 
@@ -79,7 +79,7 @@ const UploaderPhotoImg = styled.img`
 
 
 const Uploader: React.FC<IUploader> = ({ setPhoto }) => {
-  const photo = useAuth(state => state.profile?.photo)
+  const photo = useAuth(state => state.auth?.photo)
   const [file, setFile] = useState<any>(photo)
   
   const uploadHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

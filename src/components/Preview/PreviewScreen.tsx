@@ -1,7 +1,6 @@
 import styled from "styled-components"
-import { useLinks } from "../../store/useLinks"
 import PreviewItem from "./PreviewItem"
-import { useAuth } from "../../store/useAuth"
+import { useAuth } from "../../store/useApp"
 
 // Styles
 const PreviewAva = styled.div`
@@ -48,28 +47,27 @@ const PreviewList = styled.div`
 `
 
 const PreviewScreen: React.FC = () => {
-  const links = useLinks(state => state.links)
-  const profile = useAuth(state => state.profile)
+  const { auth } = useAuth()
 
   // skeletsRest
-  const skeletsRest = 5 - links.length
+  const skeletsRest = 5 - auth!.links.length
 
   return (
     <div>
       <PreviewAva>
-        {profile?.photo && <img src={profile.photo} alt="" />}
+        {auth?.photo && <img src={auth.photo} alt="" />}
       </PreviewAva>
       <PreviewName>
-        {(!profile?.firstname && !profile?.lastname) && <PreviewNameSkelet $type="medium" />}
-        {profile?.firstname && profile.firstname} {profile?.lastname && profile.lastname}
+        {(!auth?.firstname && !auth?.lastname) && <PreviewNameSkelet $type="medium" />}
+        {auth?.firstname && auth.firstname} {auth?.lastname && auth.lastname}
       </PreviewName>
       <PreviewEmail>
-        {!profile?.email && <PreviewNameSkelet $type="small" />}
-        {profile?.email && profile.email}
+        {!auth?.email && <PreviewNameSkelet $type="small" />}
+        {auth?.email && auth.email}
       </PreviewEmail>
 
       <PreviewList>
-        {links.map(el => <PreviewItem key={el.id} link={el.link} platform={el.platform} />)}
+        {auth?.links.map(el => <PreviewItem key={el.id} link={el.link} platform={el.platform} />)}
         {(skeletsRest > 0) && Array.from(Array(skeletsRest)).map((__, index) => <PreviewNameSkelet key={index} />)}
       </PreviewList>
 
