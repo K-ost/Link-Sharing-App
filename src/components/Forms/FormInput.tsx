@@ -16,9 +16,27 @@ interface IFormInput {
 }
 
 // Styled
-export const InputWrap = styled.div`
+export const InputWrap = styled.div<{ $icon: InputIconType }>`
   position: relative;
   width: 100%;
+  &::before {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: ${props => 
+      props.$icon === 'link' ? `url(${link})` :
+      props.$icon === 'lock' ? `url(${lock})` :
+      props.$icon === 'mail' ? `url(${mail})` :
+      'none'
+    };
+    content: '';
+    display: block;
+    height: 16px;
+    left: 16px;
+    margin-top: -8px;
+    position: absolute;
+    top: 50%;
+    width: 16px;
+  }
 `
 export const InputError = styled.div`
   color: var(--color-red);
@@ -30,15 +48,7 @@ export const InputError = styled.div`
   top: 50%;
 `
 const Input = styled.input<{ $error: boolean, $icon: InputIconType }>`
-  background: var(--color-white);
-  background-position: 16px center;
-  background-repeat: no-repeat;
-  background-image: ${props => 
-    props.$icon === 'link' ? `url(${link})` :
-    props.$icon === 'lock' ? `url(${lock})` :
-    props.$icon === 'mail' ? `url(${mail})` :
-    'none'
-  };
+  background: 0;
   border-radius: 8px;
   border: 1px solid ${props => props.$error ? 'var(--color-red) !important' : 'var(--color-border)'};
   color: ${props => props.$error ? 'var(--color-red)' : '#4C4C4C'};
@@ -59,7 +69,7 @@ const Input = styled.input<{ $error: boolean, $icon: InputIconType }>`
 
 const FormInput: React.FC<IFormInput> = ({ handler, error = false, icon = null, placeholder, type = 'text', valid }) => {
   return (
-    <InputWrap>
+    <InputWrap $icon={icon}>
       <Input
         type={type}
         onChange={handler}

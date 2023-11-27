@@ -26,7 +26,7 @@ const Login: React.FC = () => {
           <div className="module-text">
             Add your details below to get back into the app
           </div>
-          <form onSubmit={handleSubmit(loginHandler)}>
+          <form onSubmit={handleSubmit(loginHandler)} noValidate>
             <FormField label="Email address">
               <FormInput
                 valid={register('email', {
