@@ -4,9 +4,16 @@ import FormField from "../components/Forms/FormField"
 import FormInput from "../components/Forms/FormInput"
 import logo from "../assets/images/logo-devlinks-large.svg"
 import { useAuth } from "../store/useAuth"
+import { useForm } from "react-hook-form"
 
 const Login: React.FC = () => {
-  const setLogin = useAuth(state => state.setLogin)
+  const loginUser = useAuth(state => state.loginUser)
+  const { handleSubmit, register, formState: { errors } } = useForm()
+
+  // loginHandler
+  const loginHandler = (data: any) => {
+    loginUser(data)
+  }
 
   return (
     <div className="container-short centered">
@@ -19,15 +26,35 @@ const Login: React.FC = () => {
           <div className="module-text">
             Add your details below to get back into the app
           </div>
-          <FormField label="Email address">
-            <FormInput handler={() => {}} placeholder="e.g. alex@email.com" icon="mail" type="email" />
-          </FormField>
-          <FormField label="Password">
-            <FormInput handler={() => {}} placeholder="Enter your password" icon="lock" type="password" />
-          </FormField>
-          <FormField>
-            <Btn text="Login" expand handler={setLogin} />
-          </FormField>
+          <form onSubmit={handleSubmit(loginHandler)}>
+            <FormField label="Email address">
+              <FormInput
+                valid={register('email', {
+                  required: 'Required field',
+                  pattern: { message: 'E-mail must be correct', value: /^\S+@\S+$/i }
+                })}
+                error={errors.email && errors.email.message}
+                placeholder="e.g. alex@email.com"
+                icon="mail"
+                type="email"
+              />
+            </FormField>
+            <FormField label="Password">
+              <FormInput
+                valid={register('password', {
+                  required: 'Required field',
+                  minLength: { value: 8, message: 'Should contain at least 8 characters' }
+                })}
+                error={errors.password && errors.password.message}
+                placeholder="Enter your password"
+                icon="lock"
+                type="password"
+              />
+            </FormField>
+            <FormField>
+              <Btn type="submit" text="Login" expand />
+            </FormField>
+          </form>
           <div className="module-text text-center">
             Don't have an account? <Link to="/register">Create account</Link>
           </div>

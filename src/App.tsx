@@ -15,12 +15,12 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<ProtectedRoutes isAuth={auth} />}>
+        <Route path="/" element={<ProtectedRoutes isAuth={!!auth} />}>
           <Route index path="/" element={<Desktop />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/preview" element={<Preview />} />
         </Route>
-        <Route path="/" element={<PublicRoutes isAuth={auth} />}>
+        <Route path="/" element={<PublicRoutes isAuth={!!auth} />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
