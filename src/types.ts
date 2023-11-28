@@ -1,3 +1,5 @@
+import { type } from "os"
+
 export type LinkOptionType = {
   value: string
   label: string
@@ -23,4 +25,10 @@ export type UserType = {
 export type SignUpType = {
   email: string
   password: string
+}
+
+export type ResponseType = {
+  show: boolean
+  message: string
+  icon?: boolean
 }

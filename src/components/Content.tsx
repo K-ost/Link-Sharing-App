@@ -20,6 +20,8 @@ const ContentTop = styled.div`
 `
 const ContentBottom = styled.div`
   border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: flex-end;
   padding: var(--gap);
   @media screen and (max-width: 750px) {
     ${Button} { width: 100%; }

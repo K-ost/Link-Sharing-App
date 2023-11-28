@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import eye from "../../assets/images/icon-preview-header.svg"
 import React from "react"
 
@@ -15,9 +15,12 @@ interface IBtn {
 }
 
 // Styled
-const stylesBtn = `
+const stylesBtn = css<{ $bordered: boolean, $expand: boolean }>`
   align-items: center;
+  background: var(--color-${props => props.$bordered ? 'white' : 'purple'});
+  border: 1px solid var(--color-${props => props.$bordered ? 'purple' : 'transparent'});
   border-radius: 8px;
+  color: var(--color-${props => props.$bordered ? 'purple' : 'white'}) !important;
   cursor: pointer;
   display: flex;
   font-family: var(--ff);
@@ -29,10 +32,18 @@ const stylesBtn = `
   padding: 11px 26px;
   text-align: center;
   transition: var(--animate);
+  width: ${props => props.$expand ? '100%' : 'auto'};
   -webkit-appearance: none;
   &:disabled {
     cursor: default;
     opacity: 0.25;
+  }
+  &:hover, &:active {
+    &:not(:disabled) {
+      background: var(--color-${props => props.$bordered ? 'purple-light' : 'purple-hover'});
+      border-color: var(--color-${props => props.$bordered ? 'purple' : 'purple-hover'});
+      box-shadow: ${props => !props.$bordered ? '0px 0px 32px 0px rgba(99, 60, 255, 0.25)' : 'none !important'};
+    }
   }
   @media screen and (max-width: 750px) {
     svg { display: block; }
@@ -46,34 +57,12 @@ const stylesBtn = `
     }
   }
 `
+
 export const Button = styled.button<{ $bordered: boolean, $expand: boolean }>`
-  background: var(--color-${props => props.$bordered ? 'white' : 'purple'});
-  border: 1px solid var(--color-${props => props.$bordered ? 'purple' : 'transparent'});
-  color: var(--color-${props => props.$bordered ? 'purple' : 'white'}) !important;
-  width: ${props => props.$expand ? '100%' : 'auto'};
   ${stylesBtn}
-  &:hover, &:active {
-    &:not(:disabled) {
-      background: var(--color-${props => props.$bordered ? 'purple-light' : 'purple-hover'});
-      border-color: var(--color-${props => props.$bordered ? 'purple' : 'purple-hover'});
-      box-shadow: ${props => !props.$bordered ? '0px 0px 32px 0px rgba(99, 60, 255, 0.25)' : 'none !important'};
-    }
-  }
 `
 const LinkButton = styled(Link)<{ $bordered: boolean, $expand: boolean }>`
-  background: var(--color-${props => props.$bordered ? 'white' : 'purple'});
-  background-image: var(${eye});
-  border: 1px solid var(--color-${props => props.$bordered ? 'purple' : 'transparent'});
-  color: var(--color-${props => props.$bordered ? 'purple' : 'white'}) !important;
-  width: ${props => props.$expand ? '100%' : 'auto'};
   ${stylesBtn}
-  &:hover, &:active {
-    &:not(:disabled) {
-      background: var(--color-${props => props.$bordered ? 'purple-light' : 'purple-hover'});
-      border-color: var(--color-${props => props.$bordered ? 'purple' : 'purple-hover'});
-      box-shadow: ${props => !props.$bordered ? '0px 0px 32px 0px rgba(99, 60, 255, 0.25)' : 'none !important'};
-    }
-  }
 `
 
 const Btn: React.FC<IBtn> = ({ bordered = false, disabled, expand = false, handler, preview = false, text, type = 'button', to }) => {

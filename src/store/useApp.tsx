@@ -1,17 +1,18 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-import { LinkType, SignUpType, UserType } from '../types'
+import { LinkType, SignUpType, UserType, ResponseType } from '../types'
 import { nanoid } from 'nanoid'
 
 interface AuthState {
   auth: UserType | null
-  response: string,
+  response: ResponseType,
   users: UserType[],
   setLogout: () => void
   updateProfile: (data: UserType, userId: string) => void
   createUser: (data: SignUpType) => void
   loginUser: (data: SignUpType) => void
   updateLinks: (data: LinkType[], userId: string) => void
+  setResponse: (data: ResponseType) => void
   clearResponse: () => void
 }
 
@@ -21,11 +22,15 @@ export const useAuth = create<AuthState>()(
       (set) => ({
         auth: null,
         profile: null,
-        response: '',
+        response: {
+          message: '',
+          show: false,
+          icon: false
+        },
         users: [],
 
         // Logout
-        setLogout: () => set(() => ({ auth: null, response: '' })),
+        setLogout: () => set(() => ({ auth: null, response: { message: '', show: false, icon: false } })),
 
         // updateProfile
         updateProfile: (data, userId) => set((state) => {
@@ -49,8 +54,14 @@ export const useAuth = create<AuthState>()(
           }
           return set((state) => {
             const userExists = state.users.some(user => user.email === data.email)
-            if (userExists) return { users: [...state.users], response: 'User with such e-mail already exists' }
-            return { users: [...state.users, newUser], response: `User ${data.email} has been created` }
+            if (userExists) return {
+              users: [...state.users],
+              response: { message: 'User with such e-mail already exists', show: true }
+            }
+            return {
+              users: [...state.users, newUser],
+              response: { message: `User ${data.email} has been created`, show: true }
+            }
           })
         },
 
@@ -59,9 +70,9 @@ export const useAuth = create<AuthState>()(
           return set((state) => {
             const userExists = state.users.some(user => user.email === data.email)
             const foundUser = state.users.find(user => user.email === data.email)
-            if (!userExists) return { response: `User with such e-mail doesn't exist` }
-            if (foundUser?.password !== data.password) return { response: `Wrong password` }
-            return { response: 'User has been logged', auth: foundUser }
+            if (!userExists) return { response: { message: `User with such e-mail doesn't exist`, show: true } }
+            if (foundUser?.password !== data.password) return { response: { message: `Wrong password`, show: true } }
+            return { response: { message: 'User has been logged', show: true }, auth: foundUser }
           })
         },
 
@@ -74,8 +85,11 @@ export const useAuth = create<AuthState>()(
           })
         },
 
+        // setResponse
+        setResponse: (data) => set(() => ({ response: data })),
+
         // clearResponse
-        clearResponse: () => set(() => ({ response: '' }))
+        clearResponse: () => set(() => ({ response: { message: '', show: false, icon: false } }))
       }),
       {
         name: 'auth'

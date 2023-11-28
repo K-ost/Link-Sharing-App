@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { LinkOptionType } from "../../types"
 import arrowRight from "../../assets/images/icon-arrow-right.svg"
 import arrowRightBlack from "../../assets/images/icon-arrow-right-black.svg"
+import { useAuth } from "../../store/useApp"
 
 interface IPreviewItem {
   link: string
@@ -15,11 +16,13 @@ const ItemImg = styled.div`
   max-width: 20px;
   img { display: block; filter: brightness(0) invert(1); }
 `
-const Item = styled.a`
+const Item = styled.button`
   align-items: center;
   background: var(--color-skelets);
+  border: 0;
   border-radius: 8px;
   color: var(--color-white);
+  cursor: pointer;
   display: flex;
   font-size: 12px;
   font-weight: 400;
@@ -28,6 +31,7 @@ const Item = styled.a`
   height: 44px;
   padding: 11px 16px;
   position: relative;
+  width: 100%;
   &:last-child { margin: 0; }
   &:hover { color: var(--color-white); }
   &::after {
@@ -65,9 +69,20 @@ const Item = styled.a`
 
 const PreviewItem: React.FC<IPreviewItem> = ({ link, platform }) => {
   const icon = `../../src/assets/images/icon-${platform.value}.svg`
+  const setResponse = useAuth(state => state.setResponse)
+
+  // copyToClipboard
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(link)
+    setResponse({
+      message: 'The link has been copied to your clipboard!',
+      show: true,
+      icon: true
+    })
+  }
 
   return (
-    <Item href={link} className={`item-${platform.value}`} target="_blank">
+    <Item className={`item-${platform.value}`} onClick={copyToClipboard}>
       <ItemImg>
         <img src={icon} alt="" />
       </ItemImg>
