@@ -36,7 +36,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://github.com/K-ost/Link-Sharing-App](https://github.com/K-ost/Link-Sharing-App)
-- Live Site URL: [https://github.com/K-ost/Link-Sharing-App](https://k-ost.github.io/Link-Sharing-App/)
+- Live Site URL: [https://k-ost.github.io/Link-Sharing-App/](https://k-ost.github.io/Link-Sharing-App/)
 
 ## My process
 
