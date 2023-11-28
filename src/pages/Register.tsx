@@ -28,7 +28,7 @@ const Register: React.FC = () => {
           <div className="module-text">
             Let's get you started sharing your links!
           </div>
-          <form onSubmit={handleSubmit(signUpHandler)}>
+          <form onSubmit={handleSubmit(signUpHandler)} noValidate>
             
             <FormField label="Email address">
               <FormInput
