@@ -54,7 +54,7 @@ Users should be able to:
 - [React](https://reactjs.org/) - JS library
 - [Zustand](https://zustand-demo.pmnd.rs/) - State manager
 - [Styled Components](https://styled-components.com/) - For styles
-  [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd) - Drag'n'drop ability
+- [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd) - Drag'n'drop ability
 - [React Hook Form](https://react-hook-form.com/) - For form validation
 
 ## Author
