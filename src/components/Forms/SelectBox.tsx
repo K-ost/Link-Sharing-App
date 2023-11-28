@@ -18,7 +18,7 @@ const SelectBox: React.FC<ISelectBox> = ({ list, valid }) => {
   const IconOption = (props: any) => (
     <Option {...props}>
       <img
-        src={`../../src/assets/images/icon-${props.data.icon}`}
+        src={`./../src/assets/images/icon-${props.data.icon}`}
         style={selectIcon}
         alt={props.data.label}
       />
@@ -29,7 +29,7 @@ const SelectBox: React.FC<ISelectBox> = ({ list, valid }) => {
     const currentValue = props.getValue()[0]
     return <SingleValue {...props}>
       <img
-        src={`../../src/assets/images/icon-${currentValue.icon}`}
+        src={`./../src/assets/images/icon-${currentValue.icon}`}
         style={selectIcon}
         alt={currentValue.label}
       />
