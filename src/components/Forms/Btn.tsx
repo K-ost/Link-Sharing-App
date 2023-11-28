@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import eye from "../../assets/images/icon-preview-header.svg"
+import React from "react"
 
 interface IBtn {
   bordered?: boolean
   disabled?: boolean
   expand?: boolean
   handler?: () => void
+  preview?: boolean
   text: string
   type?: 'button' | 'submit'
   to?: string
@@ -13,14 +16,17 @@ interface IBtn {
 
 // Styled
 const stylesBtn = `
+  align-items: center;
   border-radius: 8px;
   cursor: pointer;
+  display: flex;
   font-family: var(--ff);
   font-size: var(--fs);
   font-weight: 600;
+  justify-content: center;
   line-height: 24px;
   outline: none;
-  padding: 10px 26px;
+  padding: 11px 26px;
   text-align: center;
   transition: var(--animate);
   -webkit-appearance: none;
@@ -28,8 +34,19 @@ const stylesBtn = `
     cursor: default;
     opacity: 0.25;
   }
+  @media screen and (max-width: 750px) {
+    svg { display: block; }
+    &.preview {
+      background-image: url(${eye});
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 42px;
+      width: 52px;
+      span { display: none; }
+    }
+  }
 `
-const Button = styled.button<{ $bordered: boolean, $expand: boolean }>`
+export const Button = styled.button<{ $bordered: boolean, $expand: boolean }>`
   background: var(--color-${props => props.$bordered ? 'white' : 'purple'});
   border: 1px solid var(--color-${props => props.$bordered ? 'purple' : 'transparent'});
   color: var(--color-${props => props.$bordered ? 'purple' : 'white'}) !important;
@@ -45,6 +62,7 @@ const Button = styled.button<{ $bordered: boolean, $expand: boolean }>`
 `
 const LinkButton = styled(Link)<{ $bordered: boolean, $expand: boolean }>`
   background: var(--color-${props => props.$bordered ? 'white' : 'purple'});
+  background-image: var(${eye});
   border: 1px solid var(--color-${props => props.$bordered ? 'purple' : 'transparent'});
   color: var(--color-${props => props.$bordered ? 'purple' : 'white'}) !important;
   width: ${props => props.$expand ? '100%' : 'auto'};
@@ -58,18 +76,22 @@ const LinkButton = styled(Link)<{ $bordered: boolean, $expand: boolean }>`
   }
 `
 
-const Btn: React.FC<IBtn> = ({ bordered = false, disabled, expand = false, handler, text, type = 'button', to }) => {
+const Btn: React.FC<IBtn> = ({ bordered = false, disabled, expand = false, handler, preview = false, text, type = 'button', to }) => {
   return (
     <>
-      {!to ?
-        <Button
+      {!to
+        ? <Button
           type={type}
           $bordered={bordered}
           $expand={expand}
           disabled={disabled}
           onClick={handler}
-        >{text}</Button>
-        : <LinkButton to={to} $bordered={bordered} $expand={expand}>{text}</LinkButton>
+        >
+          <span>{text}</span>
+        </Button>
+        : <LinkButton to={to} $bordered={bordered} $expand={expand} className={preview ? 'preview' : ''}>
+            <span>{text}</span>
+          </LinkButton>
       }
     </>
   )

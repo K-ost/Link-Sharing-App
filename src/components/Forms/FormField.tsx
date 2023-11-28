@@ -16,6 +16,9 @@ const Field = styled.div<{ $lined: boolean }>`
   line-height: 18px;
   margin: ${props => props.$lined ? '0 0 12px;' : '0 0 var(--gap);'}
   &.last { margin: 0; }
+  @media screen and (max-width: 750px) {
+    ${props => props.$lined && 'display: block;'}
+  }
 `
 const FieldLabel = styled.label<{ $lined: boolean }>`
   color: var(--color-grey-dark);
@@ -27,6 +30,12 @@ const FieldLabel = styled.label<{ $lined: boolean }>`
     margin: 0 16px 0 0;
     min-width: var(--labelw);
   `}
+  @media screen and (max-width: 750px) {
+    ${props => props.$lined && `
+      margin: 0 0 4px;
+      min-width: 0;
+    `}
+  }
 `
 
 const FormField: React.FC<IFormField> = ({ children, className, label, line = false }) => {

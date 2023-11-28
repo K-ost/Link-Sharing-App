@@ -1,6 +1,5 @@
 import styled from "styled-components"
-import Btn from "./Forms/Btn"
-import { useAuth } from "../store/useApp"
+import { Button } from "./Forms/Btn"
 
 interface IContent {
   btn: React.ReactNode
@@ -21,21 +20,19 @@ const ContentTop = styled.div`
 `
 const ContentBottom = styled.div`
   border-top: 1px solid var(--color-border);
-  display: flex;
-  justify-content: space-between;
   padding: var(--gap);
+  @media screen and (max-width: 750px) {
+    ${Button} { width: 100%; }
+  }
 `
 
 const Content: React.FC<IContent> = ({ btn, children }) => {
-  const setLogout = useAuth(state => state.setLogout)
-
   return (
     <ContentBox>
       <ContentTop>
         {children}
       </ContentTop>
       <ContentBottom>
-        <Btn text="Logout" bordered handler={setLogout} />
         {btn}
       </ContentBottom>
     </ContentBox>

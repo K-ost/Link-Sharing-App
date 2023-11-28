@@ -14,15 +14,24 @@ const UploaderBox = styled.div`
   align-items: center;
   display: flex;
   margin: 0 0 var(--gap);
+  @media screen and (max-width: 750px) {
+    display: block;
+  }
 `
 const UploaderTitle = styled.div`
   margin: 0 16px 0 0;
   min-width: var(--labelw);
+  @media screen and (max-width: 750px) {
+    margin: 0 0 16px;
+  }
 `
 const UploaderBody = styled.div`
   align-items: center;
   display: flex;
   flex: 1;
+  @media screen and (max-width: 750px) {
+    display: block;
+  }
 `
 const UploaderText = styled.div`
   font-size: 12px;
@@ -31,12 +40,12 @@ const UploaderText = styled.div`
 `
 const InputFile = styled.input.attrs({ type: 'file' })`
   cursor: pointer;
-  height: 193px;
+  height: ${size};
   left: 0;
   opacity: 0;
-  top: 0;
   position: absolute;
-  width: 193px;
+  top: 0;
+  width: ${size};
 `
 const UploaderInner = styled.div<{ $loaded: boolean }>`
   background-color: ${props => props.$loaded ? 'rgba(0,0,0,0.5)' : '0'};
@@ -65,9 +74,13 @@ const UploaderPhoto = styled.div`
   height: ${size};
   margin: 0 var(--gap) 0 0;
   min-width: ${size};
+  max-width: ${size};
   position: relative;
   text-decoration: center;
   &:hover ${UploaderInner} { opacity: 1; visibility: visible; }
+  @media screen and (max-width: 750px) {
+    margin: 0 0 24px;
+  }
 `
 const UploaderPhotoImg = styled.img`
   border-radius: 12px;

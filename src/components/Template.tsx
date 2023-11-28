@@ -7,6 +7,8 @@ interface ITemplate {
   children: React.ReactNode
 }
 
+export const mobileSize: string = '750px'
+
 // Styles
 const AppWrap = styled.div`
   height: 100vh;
@@ -26,6 +28,11 @@ const AppWrap = styled.div`
     display: flex; flex-direction: column;
     .module-preview { display: none; }
     .module-content { flex: 1; }
+  }
+  @media screen and (max-width: ${mobileSize}) {
+    gap: 16px;
+    padding: 0;
+    .module-content { margin: 0 16px 16px; }
   }
 `
 const PreviewWrap = styled.div`

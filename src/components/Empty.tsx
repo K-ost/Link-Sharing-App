@@ -10,6 +10,9 @@ const EmptyBox = styled.div`
     margin: 0 auto 40px;
   }
   .article { max-width: 488px; margin: 0 auto; }
+  @media screen and (max-width: 750px) {
+    img { max-width: 124px; margin-bottom: 24px; }
+  }
 `
 
 const Empty = () => {

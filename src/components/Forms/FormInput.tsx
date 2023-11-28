@@ -48,7 +48,7 @@ export const InputError = styled.div`
   top: 50%;
 `
 const Input = styled.input<{ $error: boolean, $icon: InputIconType }>`
-  background: 0;
+  background: var(--color-white);
   border-radius: 8px;
   border: 1px solid ${props => props.$error ? 'var(--color-red) !important' : 'var(--color-border)'};
   color: ${props => props.$error ? 'var(--color-red)' : '#4C4C4C'};
