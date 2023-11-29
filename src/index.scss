@@ -103,6 +103,31 @@ h1, .h1 {
 }
 
 
+/* selectIconDiv */
+.selectIconDiv {
+  width: 20px;
+  height: 20px;
+  margin: 0 12px 0 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  &-github { background-image: url(../src/assets/images/icon-github.svg); }
+  &-frontendmentor { background-image: url(../src/assets/images/icon-frontendmentor-grey.svg); }
+  &-frontendmentor.selectIconDiv-color { background-image: url(../src/assets/images/icon-frontendmentor.svg); }
+  &-twitter { background-image: url(../src/assets/images/icon-twitter.svg); }
+  &-facebook { background-image: url(../src/assets/images/icon-facebook.svg); }
+  &-youtube { background-image: url(../src/assets/images/icon-youtube.svg); }
+  &-codewars { background-image: url(../src/assets/images/icon-codewars.svg); }
+  &-codepen { background-image: url(../src/assets/images/icon-codepen.svg); }
+  &-linkedin { background-image: url(../src/assets/images/icon-linkedin.svg); }
+  &-twitch { background-image: url(../src/assets/images/icon-twitch.svg); }
+  &-stackoverflow { background-image: url(../src/assets/images/icon-stackoverflow.svg); }
+  &-freecodecamp { background-image: url(../src/assets/images/icon-freecodecamp.svg); }
+  &-devto { background-image: url(../src/assets/images/icon-devto.svg); }
+  &-gitlab { background-image: url(../src/assets/images/icon-gitlab.svg); }
+  &-hashnode { background-image: url(../src/assets/images/icon-hashnode.svg); }
+}
+
+
 /* Responsive */
 @media screen and (max-width: 750px) {
   h1, .h1 {
@@ -118,27 +143,4 @@ h1, .h1 {
       img { margin: 0; }
     }
   }
-}
-
-
-.selectIconDiv {
-  width: 20px;
-  height: 20px;
-  margin: 0 12px 0 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  &-github { background-image: url(../src/assets/images/icon-github.svg); }
-  &-frontendmentor { background-image: url(../src/assets/images/icon-frontendmentor-grey.svg); }
-  &-twitter { background-image: url(../src/assets/images/icon-twitter.svg); }
-  &-facebook { background-image: url(../src/assets/images/icon-facebook.svg); }
-  &-youtube { background-image: url(../src/assets/images/icon-youtube.svg); }
-  &-codewars { background-image: url(../src/assets/images/icon-codewars.svg); }
-  &-codepen { background-image: url(../src/assets/images/icon-codepen.svg); }
-  &-linkedin { background-image: url(../src/assets/images/icon-linkedin.svg); }
-  &-twitch { background-image: url(../src/assets/images/icon-twitch.svg); }
-  &-stackoverflow { background-image: url(../src/assets/images/icon-stackoverflow.svg); }
-  &-freecodecamp { background-image: url(../src/assets/images/icon-freecodecamp.svg); }
-  &-devto { background-image: url(../src/assets/images/icon-devto.svg); }
-  &-gitlab { background-image: url(../src/assets/images/icon-gitlab.svg); }
-  &-hashnode { background-image: url(../src/assets/images/icon-hashnode.svg); }
 }

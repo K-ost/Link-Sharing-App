@@ -14,7 +14,7 @@ const ItemImg = styled.div`
   margin: 0 8px 0 0;
   min-width: 20px;
   max-width: 20px;
-  img { display: block; filter: brightness(0) invert(1); }
+  .selectIconDiv { display: block; filter: brightness(0) invert(1); }
 `
 const Item = styled.button`
   align-items: center;
@@ -51,7 +51,7 @@ const Item = styled.button`
     box-shadow: inset 0 0 0 1px var(--color-border);
     color: var(--color-grey-dark);
     &::after { background-image: url(${arrowRightBlack}); }
-    ${ItemImg} img { filter: none; }
+    .selectIconDiv { filter: none; }
   }
   &.item-twitter { background-color: #43B7E9; }
   &.item-linkedin { background-color: #2D68FF; }
@@ -68,7 +68,6 @@ const Item = styled.button`
 `
 
 const PreviewItem: React.FC<IPreviewItem> = ({ link, platform }) => {
-  const icon = `../../src/assets/images/icon-${platform.value}.svg`
   const setResponse = useAuth(state => state.setResponse)
 
   // copyToClipboard
@@ -84,7 +83,7 @@ const PreviewItem: React.FC<IPreviewItem> = ({ link, platform }) => {
   return (
     <Item className={`item-${platform.value}`} onClick={copyToClipboard}>
       <ItemImg>
-        <img src={icon} alt="" />
+        <div className={`selectIconDiv selectIconDiv-color selectIconDiv-${platform.value}`}></div>
       </ItemImg>
       {platform.label}
     </Item>
