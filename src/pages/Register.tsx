@@ -82,7 +82,7 @@ const Register: React.FC = () => {
             </FormField>
           </form>
           <div className="module-text text-center">
-            Already have an account? <Link to="/login">Login</Link>
+            Already have an account? <Link to="/login" aria-label="Login link">Login</Link>
           </div>
         </div>
       </div>

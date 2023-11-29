@@ -41,7 +41,7 @@ const FieldLabel = styled.label<{ $lined: boolean }>`
 const FormField: React.FC<IFormField> = ({ children, className, label, line = false }) => {
   return (
     <Field className={className} $lined={line}>
-      {label && <FieldLabel $lined={line}>{label}</FieldLabel>}
+      {label && <FieldLabel $lined={line} aria-label={label}>{label}</FieldLabel>}
       {children}
     </Field>
   )
