@@ -12,12 +12,13 @@ const SelectBox: React.FC<ISelectBox> = ({ list, valid }) => {
 
   // Curstom option
   const { Option, SingleValue } = components
-  const IconOption = (props: any) => (
-    <Option {...props}>
-      <div className={`selectIconDiv selectIconDiv-${props.data.value}`}></div>
+  const IconOption = (props: any) => {
+    console.log(props.isSelected)
+    return <Option {...props}>
+      <div className={`selectIconDiv selectIconDiv-${props.data.value} ${props.isSelected ? 'selected' : ''}`}></div>
       {props.data.label}
     </Option>
-  )
+  }
   const IconControl = (props: any) => {
     const currentValue = props.getValue()[0]
     return <SingleValue {...props}>

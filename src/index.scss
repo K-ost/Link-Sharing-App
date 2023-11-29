@@ -125,6 +125,9 @@ h1, .h1 {
   &-devto { background-image: url(../src/assets/images/icon-devto.svg); }
   &-gitlab { background-image: url(../src/assets/images/icon-gitlab.svg); }
   &-hashnode { background-image: url(../src/assets/images/icon-hashnode.svg); }
+  &.selected {
+    filter: invert(31%) sepia(90%) saturate(5747%) hue-rotate(248deg) brightness(99%) contrast(104%);
+  }
 }
 
 
