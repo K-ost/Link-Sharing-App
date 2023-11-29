@@ -57,3 +57,8 @@ Users should be able to:
 
 - Website - [https://github.com/K-ost](https://github.com/K-ost)
 - Frontend Mentor - [@K-ost](https://www.frontendmentor.io/profile/K-ost)
+
+### Hi, everyone!
+I've developed this task only as client app without backend. I used Zustand among with localstorage as kind of a database.
+Of course, I understand that if I used backend, frontend part would be implemented in a completely different way.
+Perhaps I’ll code server side and redo the frontend little later.
