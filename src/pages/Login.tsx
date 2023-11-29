@@ -56,7 +56,8 @@ const Login: React.FC = () => {
             </FormField>
           </form>
           <div className="module-text text-center">
-            Don't have an account? <Link to="/register" aria-label="Create account link">Create account</Link>
+            Don't have an account? <Link to="/register" aria-label="Create account link">Create account</Link><br />
+            Test user is mail@mail.com / 11111111
           </div>
         </div>
       </div>
