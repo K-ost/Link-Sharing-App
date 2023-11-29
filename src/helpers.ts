@@ -1,20 +1,20 @@
 import { LinkOptionType } from "./types"
 
 export const linksOptions: LinkOptionType[] = [
-  { label: "GitHub", value: "github", icon: "github.svg" },
-  { label: "Frontend Mentor", value: "frontendmentor", icon: "frontendmentor.svg" },
-  { label: "Twitter", value: "twitter", icon: "twitter.svg" },
-  { label: "LinkedIn", value: "linkedin", icon: "linkedin.svg" },
-  { label: "YouTube", value: "youtube", icon: "youtube.svg" },
-  { label: "Facebook", value: "facebook", icon: "facebook.svg" },
-  { label: "Twitch", value: "twitch", icon: "twitch.svg" },
-  { label: "Dev.to", value: "devto", icon: "devto.svg" },
-  { label: "Codewars", value: "codewars", icon: "codewars.svg" },
-  { label: "Codepen", value: "codepen", icon: "codepen.svg" },
-  { label: "freeCodeCamp", value: "freecodecamp", icon: "freecodecamp.svg" },
-  { label: "GitLab", value: "gitlab", icon: "gitlab.svg" },
-  { label: "Hashnode", value: "hashnode", icon: "hashnode.svg" },
-  { label: "Stack Overflow", value: "stackoverflow", icon: "stackoverflow.svg" }
+  { label: "GitHub", value: "github" },
+  { label: "Frontend Mentor", value: "frontendmentor" },
+  { label: "Twitter", value: "twitter" },
+  { label: "LinkedIn", value: "linkedin" },
+  { label: "YouTube", value: "youtube" },
+  { label: "Facebook", value: "facebook" },
+  { label: "Twitch", value: "twitch" },
+  { label: "Dev.to", value: "devto" },
+  { label: "Codewars", value: "codewars" },
+  { label: "Codepen", value: "codepen" },
+  { label: "freeCodeCamp", value: "freecodecamp" },
+  { label: "GitLab", value: "gitlab" },
+  { label: "Hashnode", value: "hashnode" },
+  { label: "Stack Overflow", value: "stackoverflow" }
 ]
 
 export const urlPattern = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/
