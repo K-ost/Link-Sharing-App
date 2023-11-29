@@ -7,9 +7,6 @@ interface ISelectBox {
   valid: any
 }
 
-// Select icon
-const selectIcon = { maxHeight: '16px', display: 'block', marginRight: '12px', width: '16px' }
-
 // Component
 const SelectBox: React.FC<ISelectBox> = ({ list, valid }) => {
 
