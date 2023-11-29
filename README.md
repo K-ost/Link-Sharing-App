@@ -61,4 +61,4 @@ Users should be able to:
 ### Hi, everyone!
 I've developed this task only as client app without backend. I used Zustand among with localstorage as kind of a database.
 Of course, I understand that if I used backend, frontend part would be implemented in a completely different way.
-Perhaps I’ll code server side and redo the frontend little later.
+Perhaps a little later, I'll write the server-side and change the frontend, developing a full-stack app.
