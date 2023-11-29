@@ -27,7 +27,16 @@ export const useAuth = create<AuthState>()(
           show: false,
           icon: false
         },
-        users: [],
+        users: [
+          {
+            id: '1234-5678-9012',
+            firstname: 'John',
+            lastname: '',
+            links: [],
+            email: 'mail@mail.com',
+            password: '11111111'
+          }
+        ],
 
         // Logout
         setLogout: () => set(() => ({ auth: null, response: { message: '', show: false, icon: false } })),
