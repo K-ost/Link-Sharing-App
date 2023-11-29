@@ -46,12 +46,12 @@ const Template: React.FC<ITemplate> = ({ children }) => {
   return (
     <AppWrap>
       <Header />
-      <div className="module module-preview">
+      <div className="module module-preview" role="preview-info">
         <PreviewWrap>
           <PreviewScreen />
         </PreviewWrap>
       </div>
-      <div className="module module-content">
+      <div className="module module-content" role="content">
         {children}
       </div>
     </AppWrap>

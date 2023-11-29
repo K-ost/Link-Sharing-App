@@ -28,7 +28,7 @@ const HeaderLogo = styled.div`
 
 const Header: React.FC = () => {
   return (
-    <HeaderBox className="module">
+    <HeaderBox className="module" role="header">
       <HeaderLogo />
       <Nav />
       <Btn to="/preview" text="Preview" bordered preview />
